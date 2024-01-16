@@ -24,7 +24,7 @@ class Splash extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
             Text(
-              "تعلم القرآن وتلاوة مرة واحدة كل يوم",
+              "إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ",
               style: TextStyle(
                 fontSize: 18.sp,
                 color: const Color(0xff8789A3),

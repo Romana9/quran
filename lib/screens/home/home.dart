@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../core/widgets/custom_appbar.dart';
-import 'widgets/home_listview.dart';
+import 'widgets/surah_listview.dart';
 import 'widgets/row_buttons.dart';
 
 class Home extends StatelessWidget {
@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                 SizedBox(height: 24.h),
                 const CustomRowButtons(),
                 SizedBox(height: 24.h),
-                const HomeListView(),
+                const SurahListView(),
               ],
             ),
           ),

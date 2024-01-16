@@ -76,8 +76,8 @@ class Search extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Surah(
-                                          index: AppCubit.get(context)
-                                              .search[index]["id"],
+                                          page: AppCubit.get(context)
+                                              .search[index]["page"],
                                           name: AppCubit.get(context)
                                               .search[index]["name"]))),
                               child: SizedBox(
@@ -99,10 +99,14 @@ class Search extends StatelessWidget {
                                               fit: BoxFit.cover,
                                             ),
                                             Positioned(
-                                              right: 8.5.w,
+                                              right: index + 1 < 10
+                                                  ? 16.w
+                                                  : index + 1 < 100
+                                                      ? 12.w
+                                                      : 8.5.w,
                                               top: 10.h,
                                               child: Text(
-                                                "${AppCubit.get(context).search[index]["id"]}",
+                                                "${index + 1}",
                                                 style: TextStyle(
                                                   fontSize: 14.sp,
                                                   color:
