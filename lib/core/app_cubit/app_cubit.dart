@@ -18,6 +18,12 @@ class AppCubit extends Cubit<AppState> {
     emit(ButtonIndexState());
   }
 
+  
+  addToCache(String key, String newValue) async {
+    await CacheNetwork.insertToCache(key: key, value: newValue);
+    emit(UpdateCache());
+  }
+
   updateCache(String key, String newValue) async {
     await CacheNetwork.update(key: key, newValue: newValue);
     emit(UpdateCache());

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheNetwork {
@@ -21,5 +23,61 @@ class CacheNetwork {
 
   static Future<bool> update({required String key, required String newValue}) {
     return sharedPreferences.setString(key, newValue);
+  }
+
+  static Future<void> addMapToList(Map newData) async {
+    // Retrieve existing data from SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    final jsonDataList = prefs.getStringList('dataList');
+
+    List dataList = [];
+
+    if (jsonDataList != null) {
+      // Convert JSON strings to Map objects
+      dataList = jsonDataList.map((jsonData) => jsonDecode(jsonData)).toList();
+    }
+
+    // Add the new map to the list
+    dataList.add(newData);
+
+    // Convert the list of maps back to JSON strings
+    final updatedJsonDataList =
+        dataList.map((data) => jsonEncode(data)).toList();
+
+    // Save the updated list to SharedPreferences
+    prefs.setStringList('dataList', updatedJsonDataList);
+  }
+
+  static Future<List> loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonDataList = prefs.getStringList('dataList');
+
+    if (jsonDataList == null) {
+      return [];
+    }
+
+    return jsonDataList.map((jsonData) => jsonDecode(jsonData)).toList();
+  }
+
+  static Future<void> removeItemFromList(String name) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonDataList = prefs.getStringList('dataList');
+
+    List dataList = [];
+
+    if (jsonDataList != null) {
+      // Convert JSON strings to Map objects
+      dataList = jsonDataList.map((jsonData) => jsonDecode(jsonData)).toList();
+    }
+
+    // Remove the item at the specified index
+    dataList.removeWhere((item) => item['name'] == name);
+
+    // Convert the list of maps back to JSON strings
+    final updatedJsonDataList =
+        dataList.map((data) => jsonEncode(data)).toList();
+
+    // Save the updated list to SharedPreferences
+    prefs.setStringList('dataList', updatedJsonDataList);
   }
 }

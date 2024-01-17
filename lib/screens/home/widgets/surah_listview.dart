@@ -34,8 +34,10 @@ class SurahListView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Surah(
-                            page: AppCubit.get(context).surah[index]["page"],
-                            name: AppCubit.get(context).surah[index]["name"]))),
+                              page: AppCubit.get(context).surah[index]["page"],
+                              name: AppCubit.get(context).surah[index]["name"],
+                              surah: AppCubit.get(context).surah[index],
+                            ))),
                 child: SizedBox(
                   height: 62.h,
                   width: 342.w,

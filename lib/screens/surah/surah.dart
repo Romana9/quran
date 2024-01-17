@@ -6,11 +6,14 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../core/Cache/local_network.dart';
 import '../../core/colors.dart';
+import '../../main.dart';
 
 class Surah extends StatefulWidget {
+  final Map surah;
   final int page;
   final String name;
-  const Surah({super.key, required this.page, required this.name});
+  const Surah(
+      {super.key, required this.page, required this.name, required this.surah});
 
   @override
   State<Surah> createState() => _SurahState();
@@ -38,24 +41,34 @@ class _SurahState extends State<Surah> {
                     children: [
                       Row(
                         children: [
-                          CacheNetwork.getCacheData(key: "lastRead") == ""
+                          currentList.any((item) => item['name'] == widget.name)
                               ? IconButton(
-                                  onPressed: () {
-                                    CacheNetwork.insertToCache(
-                                        key: "lastRead", value: "true");
+                                  onPressed: () async {
+                                    AppCubit.get(context)
+                                        .updateCache("lastRead", "false");
+                                    await CacheNetwork.removeItemFromList(
+                                        widget.surah["name"]);
+                                    currentList = await CacheNetwork.loadData();
+                                    print('Current List: $currentList');
                                   },
                                   icon: Icon(
-                                    Icons.bookmark_add_outlined,
+                                    Icons.bookmark_added,
+                                    color: AppColors.primary,
                                     size: 26.h,
                                   ),
                                 )
                               : IconButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     AppCubit.get(context)
-                                        .updateCache(key, newValue);
+                                        .addToCache("lastRead", "true");
+                                    await CacheNetwork.addMapToList(
+                                        widget.surah);
+                                    currentList = await CacheNetwork.loadData();
+                                    print('Current List: $currentList');
                                   },
                                   icon: Icon(
-                                    Icons.bookmark_added,
+                                    Icons.bookmark_add_outlined,
+                                    color: AppColors.primary,
                                     size: 26.h,
                                   ),
                                 ),
@@ -82,7 +95,7 @@ class _SurahState extends State<Surah> {
                   ),
                 ),
                 SizedBox(
-                  height: 660.h,
+                  height: 650.h,
                   child: PDF(
                     defaultPage: widget.page,
                     swipeHorizontal: true,

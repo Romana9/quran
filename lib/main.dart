@@ -8,10 +8,14 @@ import 'core/Cache/local_network.dart';
 import 'core/app_cubit/app_cubit.dart';
 import 'screens/splash/splash.dart';
 
+List currentList = [];
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await CacheNetwork.cacheInitilzation();
+  currentList = await CacheNetwork.loadData();
+  print("currentList is $currentList");
   runApp(const Quran());
 }
 

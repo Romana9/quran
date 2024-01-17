@@ -28,7 +28,8 @@ class CustomRowButtons extends StatelessWidget {
               ),
               child: TextButton(
                 style: const ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(AppColors.primary)),
+                    overlayColor: MaterialStatePropertyAll(
+                        Color.fromARGB(88, 104, 44, 188))),
                 onPressed: () {
                   AppCubit.get(context).buttonIndexFun(0);
                 },
@@ -56,7 +57,8 @@ class CustomRowButtons extends StatelessWidget {
               ),
               child: TextButton(
                 style: const ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(AppColors.primary)),
+                    overlayColor: MaterialStatePropertyAll(
+                        Color.fromARGB(88, 104, 44, 188))),
                 onPressed: () {
                   AppCubit.get(context).buttonIndexFun(1);
                 },

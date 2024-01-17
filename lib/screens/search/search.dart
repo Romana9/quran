@@ -76,10 +76,13 @@ class Search extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Surah(
-                                          page: AppCubit.get(context)
-                                              .search[index]["page"],
-                                          name: AppCubit.get(context)
-                                              .search[index]["name"]))),
+                                            page: AppCubit.get(context)
+                                                .search[index]["page"],
+                                            name: AppCubit.get(context)
+                                                .search[index]["name"],
+                                            surah: AppCubit.get(context)
+                                                .search[index],
+                                          ))),
                               child: SizedBox(
                                 height: 62.h,
                                 width: 342.w,
