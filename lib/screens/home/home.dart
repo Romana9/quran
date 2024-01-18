@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
@@ -25,7 +26,12 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomAppBar(
-                  child: SvgPicture.asset("assets/svg/menu.svg"),
+                  child: InkWell(
+                    onTap: () {
+                      FlutterRingtonePlayer().stop();
+                    },
+                    child: SvgPicture.asset("assets/svg/menu.svg"),
+                  ),
                 ),
                 SizedBox(height: 24.h),
                 Text(
