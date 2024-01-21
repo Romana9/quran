@@ -24,17 +24,8 @@ class CustomAppBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                InkWell(
-                  onTap: () {
-                    AppCubit.get(context).search.clear();
-                    print(AppCubit.get(context).search);
-                    searchDialog(context);
-                  },
-                  child: Icon(
-                    Icons.search,
-                    color: const Color(0xff8789A3),
-                    size: 24.h,
-                  ),
+                SizedBox(
+                  child: child,
                 ),
                 SizedBox(width: 24.w),
                 Text(
@@ -47,8 +38,17 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              child: child,
+            InkWell(
+              onTap: () {
+                AppCubit.get(context).search.clear();
+                print(AppCubit.get(context).search);
+                searchDialog(context);
+              },
+              child: Icon(
+                Icons.search,
+                color: const Color(0xff8789A3),
+                size: 24.h,
+              ),
             ),
           ],
         );

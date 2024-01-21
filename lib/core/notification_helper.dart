@@ -141,9 +141,9 @@ Future<void> _fireBaseBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
   FlutterRingtonePlayer().play(
-        fromAsset: "assets/pdf/adhan.mp3",
-        looping: false,
-        volume: 1,
-        asAlarm: false,
-      );
+    fromAsset: "assets/pdf/adhan.mp3",
+    looping: false,
+    volume: 1,
+    asAlarm: false,
+  );
 }
