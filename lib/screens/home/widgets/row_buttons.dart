@@ -28,8 +28,7 @@ class CustomRowButtons extends StatelessWidget {
               ),
               child: TextButton(
                 style: const ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(
-                        Color.fromARGB(88, 104, 44, 188))),
+                    overlayColor: MaterialStatePropertyAll(Color(0xff027770))),
                 onPressed: () {
                   AppCubit.get(context).buttonIndexFun(0);
                 },
@@ -57,13 +56,12 @@ class CustomRowButtons extends StatelessWidget {
               ),
               child: TextButton(
                 style: const ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(
-                        Color.fromARGB(88, 104, 44, 188))),
+                    overlayColor: MaterialStatePropertyAll(Color(0xff027770))),
                 onPressed: () {
                   AppCubit.get(context).buttonIndexFun(1);
                 },
                 child: Text(
-                  'آخر قراءة',
+                  'الأذكار',
                   style: TextStyle(
                     color: AppCubit.get(context).buttonIndex == 1
                         ? AppColors.primary
@@ -86,15 +84,42 @@ class CustomRowButtons extends StatelessWidget {
               ),
               child: TextButton(
                 style: const ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(
-                        Color.fromARGB(88, 104, 44, 188))),
+                    overlayColor: MaterialStatePropertyAll(Color(0xff027770))),
                 onPressed: () {
                   AppCubit.get(context).buttonIndexFun(2);
                 },
                 child: Text(
-                  "القبلة",
+                  'آخر قراءة',
                   style: TextStyle(
                     color: AppCubit.get(context).buttonIndex == 2
+                        ? AppColors.primary
+                        : const Color(0xff8789A3),
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.transparent,
+              shape: Border(
+                bottom: BorderSide(
+                  color: AppCubit.get(context).buttonIndex == 3
+                      ? AppColors.primary
+                      : const Color(0xff8789A3).withOpacity(0.1),
+                  width: 3.w,
+                ),
+              ),
+              child: TextButton(
+                style: const ButtonStyle(
+                    overlayColor: MaterialStatePropertyAll(Color(0xff027770))),
+                onPressed: () {
+                  AppCubit.get(context).buttonIndexFun(3);
+                },
+                child: Text(
+                  "القبلة",
+                  style: TextStyle(
+                    color: AppCubit.get(context).buttonIndex == 3
                         ? AppColors.primary
                         : const Color(0xff8789A3),
                     fontSize: 20.sp,

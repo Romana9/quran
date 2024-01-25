@@ -5,6 +5,7 @@ import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:quran/core/colors.dart';
 import 'location_error_widget.dart';
 
 class QiblahCompass extends StatefulWidget {
@@ -37,12 +38,16 @@ class _QiblahCompassState extends State<QiblahCompass> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(8.0),
       child: StreamBuilder(
         stream: stream,
         builder: (context, AsyncSnapshot<LocationStatus> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return SizedBox(
+              height: 350.h,
+              child: const Center(
+                child: CircularProgressIndicator(color: AppColors.secondray),
+              ),
+            );
           }
           if (snapshot.data!.enabled == true) {
             switch (snapshot.data!.status) {
@@ -52,7 +57,13 @@ class _QiblahCompassState extends State<QiblahCompass> {
                   stream: FlutterQiblah.qiblahStream,
                   builder: (_, AsyncSnapshot<QiblahDirection> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return SizedBox(
+                        height: 350.h,
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.secondray),
+                        ),
+                      );
                     }
 
                     final qiblahDirection = snapshot.data!;
@@ -81,7 +92,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                           bottom: -5.h,
                           right: 30.w,
                           child: Text(
-                              "${qiblahDirection.offset.toStringAsFixed(3)}°"),
+                              "${qiblahDirection.offset.toStringAsFixed(2)}°"),
                         )
                       ],
                     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LocationErrorWidget extends StatelessWidget {
   final String? error;
@@ -8,27 +9,26 @@ class LocationErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const box = SizedBox(height: 32);
     const errorColor = Color(0xffb00020);
 
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Icon(
+          Icon(
             Icons.location_off,
-            size: 150,
+            size: 150.h,
             color: errorColor,
           ),
-          box,
+          SizedBox(height: 32.h),
           Text(
             error!,
-            style: const TextStyle(
-                color: errorColor, fontWeight: FontWeight.bold),
+            style:
+                const TextStyle(color: errorColor, fontWeight: FontWeight.bold),
           ),
-          box,
+          SizedBox(height: 32.h),
           ElevatedButton(
-            child: const Text("Retry"),
+            child: const Text("اعادة المحاولة"),
             onPressed: () {
               if (callback != null) callback!();
             },

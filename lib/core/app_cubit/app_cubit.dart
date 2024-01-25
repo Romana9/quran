@@ -18,7 +18,6 @@ class AppCubit extends Cubit<AppState> {
     emit(ButtonIndexState());
   }
 
-  
   addToCache(String key, String newValue) async {
     await CacheNetwork.insertToCache(key: key, value: newValue);
     emit(UpdateCache());
@@ -30,6 +29,20 @@ class AppCubit extends Cubit<AppState> {
   }
 
   List search = [];
+  List azkar = [
+    {
+      "page": 0,
+      "name": "الأذكار",
+      "pageNum": 30,
+      "pdfName" : "bookor",
+    },
+    {
+      "page": 0,
+      "name": "أذكار الصباح والمساء",
+      "pageNum": 4,
+      "pdfName" : "morning",
+    },
+  ];
   List surah = [
     {
       "page": 0,

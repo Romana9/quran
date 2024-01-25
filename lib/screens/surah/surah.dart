@@ -12,8 +12,13 @@ class Surah extends StatefulWidget {
   final Map surah;
   final int page;
   final String name;
+  final String pdfName;
   const Surah(
-      {super.key, required this.page, required this.name, required this.surah});
+      {super.key,
+      required this.page,
+      required this.name,
+      required this.surah,
+      required this.pdfName});
 
   @override
   State<Surah> createState() => _SurahState();
@@ -39,50 +44,65 @@ class _SurahState extends State<Surah> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          currentList.any((item) => item['name'] == widget.name)
-                              ? IconButton(
-                                  onPressed: () async {
-                                    AppCubit.get(context)
-                                        .updateCache("lastRead", "false");
-                                    await CacheNetwork.removeItemFromList(
-                                        widget.surah["name"]);
-                                    currentList = await CacheNetwork.loadData();
-                                    print('Current List: $currentList');
-                                  },
-                                  icon: Icon(
-                                    Icons.bookmark_added,
+                      widget.pdfName == "quran"
+                          ? Row(
+                              children: [
+                                currentList.any(
+                                        (item) => item['name'] == widget.name)
+                                    ? IconButton(
+                                        onPressed: () async {
+                                          AppCubit.get(context)
+                                              .updateCache("lastRead", "false");
+                                          await CacheNetwork.removeItemFromList(
+                                              widget.surah["name"]);
+                                          currentList =
+                                              await CacheNetwork.loadData();
+                                          print('Current List: $currentList');
+                                        },
+                                        icon: Icon(
+                                          Icons.bookmark_added,
+                                          color: AppColors.primary,
+                                          size: 26.h,
+                                        ),
+                                      )
+                                    : IconButton(
+                                        onPressed: () async {
+                                          AppCubit.get(context)
+                                              .addToCache("lastRead", "true");
+                                          await CacheNetwork.addMapToList(
+                                              widget.surah);
+                                          currentList =
+                                              await CacheNetwork.loadData();
+                                          print('Current List: $currentList');
+                                        },
+                                        icon: Icon(
+                                          Icons.bookmark_add_outlined,
+                                          color: AppColors.primary,
+                                          size: 26.h,
+                                        ),
+                                      ),
+                                SizedBox(width: 10.w),
+                                Text(
+                                  "قرآني",
+                                  style: TextStyle(
+                                    fontSize: 23.sp,
+                                    fontWeight: FontWeight.bold,
                                     color: AppColors.primary,
-                                    size: 26.h,
-                                  ),
-                                )
-                              : IconButton(
-                                  onPressed: () async {
-                                    AppCubit.get(context)
-                                        .addToCache("lastRead", "true");
-                                    await CacheNetwork.addMapToList(
-                                        widget.surah);
-                                    currentList = await CacheNetwork.loadData();
-                                    print('Current List: $currentList');
-                                  },
-                                  icon: Icon(
-                                    Icons.bookmark_add_outlined,
-                                    color: AppColors.primary,
-                                    size: 26.h,
                                   ),
                                 ),
-                          SizedBox(width: 10.w),
-                          Text(
-                            "قرآني",
-                            style: TextStyle(
-                              fontSize: 23.sp,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
+                              ],
+                            )
+                          : Padding(
+                              padding: EdgeInsets.only(right: 30.w),
+                              child: Text(
+                                "قرآني",
+                                style: TextStyle(
+                                  fontSize: 23.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
                       InkWell(
                         onTap: () => Navigator.pop(context),
                         child: Icon(
@@ -113,7 +133,7 @@ class _SurahState extends State<Surah> {
                           .add('${currentPage + 1} - $pageCount');
                     },
                   ).fromAsset(
-                    "assets/pdf/quran.pdf",
+                    "assets/pdf/${widget.pdfName}.pdf",
                     loadingWidget: () => const Center(
                         child: CircularProgressIndicator(
                             color: AppColors.primary)),

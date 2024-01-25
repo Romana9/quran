@@ -37,6 +37,7 @@ class SurahListView extends StatelessWidget {
                               page: AppCubit.get(context).surah[index]["page"],
                               name: AppCubit.get(context).surah[index]["name"],
                               surah: AppCubit.get(context).surah[index],
+                              pdfName: 'quran',
                             ))),
                 child: SizedBox(
                   height: 62.h,
@@ -57,16 +58,16 @@ class SurahListView extends StatelessWidget {
                               ),
                               Positioned(
                                 right: index + 1 < 10
-                                    ? 16.w
+                                    ? 17.w
                                     : index + 1 < 100
-                                        ? 12.w
+                                        ? 13.w
                                         : 8.5.w,
                                 top: 10.h,
                                 child: Text(
                                   "${index + 1}",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: const Color(0xff240F4F),
+                                    color: AppColors.primary,
                                   ),
                                 ),
                               ),

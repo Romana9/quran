@@ -61,8 +61,14 @@ class CustomAppBar extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("البحث",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+            title: Text(
+              "البحث",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
             content: TextFormField(
               controller: _searchController,
               validator: (value) {
@@ -71,6 +77,18 @@ class CustomAppBar extends StatelessWidget {
                 } else {
                   return null;
                 }
+              },
+              onFieldSubmitted: (value) {
+                AppCubit.get(context).search = AppCubit.get(context)
+                    .surah
+                    .where((s) =>
+                        s["name"].toString().contains(_searchController.text))
+                    .toList();
+                print(AppCubit.get(context).search);
+                Navigator.of(context).pop(false);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Search()));
+                _searchController.clear();
               },
               style: TextStyle(fontSize: 16.sp),
               cursorColor: AppColors.primary,
@@ -120,8 +138,11 @@ class CustomAppBar extends StatelessWidget {
                 },
                 child: Text(
                   "بحث",
-                  style:
-                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.secondray,
+                  ),
                 ),
               ),
             ],
