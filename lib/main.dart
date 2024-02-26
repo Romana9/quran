@@ -19,7 +19,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await CacheNetwork.cacheInitilzation();
-  await LocationHelper.determinePosition();
   currentList = await CacheNetwork.loadData();
   position = await LocationHelper.determinePosition();
   print("currentList is $currentList");

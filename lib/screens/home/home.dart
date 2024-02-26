@@ -48,15 +48,15 @@ class _HomeState extends State<Home> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 24.h),
-                    Text(
-                      "السلام عليكم",
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
+                    // SizedBox(height: 24.h),
+                    // Text(
+                    //   "السلام عليكم",
+                    //   style: TextStyle(
+                    //     fontSize: 24.sp,
+                    //     fontWeight: FontWeight.w600,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
                     SizedBox(height: 24.h),
                     const PrayerTimeContainer(),
                     SizedBox(height: 24.h),

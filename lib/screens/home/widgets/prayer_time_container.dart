@@ -92,12 +92,26 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
               Container(
                 height: 131.h,
                 width: 326.w,
+                clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(colors: [
-                    AppColors.primary,
-                    AppColors.secondray,
-                  ]),
+                  // gradient: const LinearGradient(colors: [
+                  //   AppColors.primary,
+                  //   AppColors.secondray,
+                  // ]),
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                  color: AppColors.primary,
+                  image: const DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage("assets/img/home.png"),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade400,
+                      blurRadius: 5.r,
+                      spreadRadius: 1.r,
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

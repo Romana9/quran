@@ -61,7 +61,8 @@ class _QiblahCompassState extends State<QiblahCompass> {
                         height: 350.h,
                         child: const Center(
                           child: CircularProgressIndicator(
-                              color: AppColors.secondray),
+                            color: AppColors.secondray,
+                          ),
                         ),
                       );
                     }
@@ -76,6 +77,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                           child: SvgPicture.asset(
                             'assets/svg/compass.svg',
                             height: 350.h,
+                            color: Colors.white,
                           ),
                         ),
                         Transform.rotate(

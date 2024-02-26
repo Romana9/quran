@@ -14,6 +14,7 @@ class CustomRowButtons extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Material(
               color: Colors.transparent,
