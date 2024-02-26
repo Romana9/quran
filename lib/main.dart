@@ -55,17 +55,18 @@ class Quran extends StatelessWidget {
         return BlocProvider(
           create: (context) => AppCubit(),
           child: MaterialApp(
-              locale: const Locale("ar"),
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              debugShowCheckedModeBanner: false,
-              title: "قرآني",
-              home: const Splash()),
+            locale: const Locale("ar"),
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            title: "قرآني",
+            home: const Splash(),
+          ),
         );
       },
     );

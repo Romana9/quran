@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/app_cubit/app_cubit.dart';
-import '../../../core/colors.dart';
 import '../../surah/surah.dart';
 
 class AzkarListView extends StatelessWidget {
@@ -35,7 +34,8 @@ class AzkarListView extends StatelessWidget {
                               page: AppCubit.get(context).azkar[index]["page"],
                               name: AppCubit.get(context).azkar[index]["name"],
                               surah: AppCubit.get(context).azkar[index],
-                              pdfName: AppCubit.get(context).azkar[index]["pdfName"],
+                              pdfName: AppCubit.get(context).azkar[index]
+                                  ["pdfName"],
                             ))),
                 child: SizedBox(
                   height: 62.h,
@@ -57,7 +57,7 @@ class AzkarListView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.secondray,
+                              color: Colors.white,
                             ),
                           ),
                         ],

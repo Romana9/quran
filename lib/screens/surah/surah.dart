@@ -35,114 +35,132 @@ class _SurahState extends State<Surah> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Padding(
-            padding: EdgeInsets.only(top: 45.h),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      widget.pdfName == "quran"
-                          ? Row(
-                              children: [
-                                currentList.any(
-                                        (item) => item['name'] == widget.name)
-                                    ? IconButton(
-                                        onPressed: () async {
-                                          AppCubit.get(context)
-                                              .updateCache("lastRead", "false");
-                                          await CacheNetwork.removeItemFromList(
-                                              widget.surah["name"]);
-                                          currentList =
-                                              await CacheNetwork.loadData();
-                                          print('Current List: $currentList');
-                                        },
-                                        icon: Icon(
-                                          Icons.bookmark_added,
-                                          color: AppColors.primary,
-                                          size: 26.h,
-                                        ),
-                                      )
-                                    : IconButton(
-                                        onPressed: () async {
-                                          AppCubit.get(context)
-                                              .addToCache("lastRead", "true");
-                                          await CacheNetwork.addMapToList(
-                                              widget.surah);
-                                          currentList =
-                                              await CacheNetwork.loadData();
-                                          print('Current List: $currentList');
-                                        },
-                                        icon: Icon(
-                                          Icons.bookmark_add_outlined,
-                                          color: AppColors.primary,
-                                          size: 26.h,
-                                        ),
+          body: Stack(
+            children: [
+              SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/img/home.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 45.h),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          widget.pdfName == "quran"
+                              ? Row(
+                                  children: [
+                                    currentList.any((item) =>
+                                            item['name'] == widget.name)
+                                        ? IconButton(
+                                            onPressed: () async {
+                                              AppCubit.get(context).updateCache(
+                                                  "lastRead", "false");
+                                              await CacheNetwork
+                                                  .removeItemFromList(
+                                                      widget.surah["name"]);
+                                              currentList =
+                                                  await CacheNetwork.loadData();
+                                              print(
+                                                  'Current List: $currentList');
+                                            },
+                                            icon: Icon(
+                                              Icons.bookmark_added,
+                                              color: Colors.white,
+                                              size: 26.h,
+                                            ),
+                                          )
+                                        : IconButton(
+                                            onPressed: () async {
+                                              AppCubit.get(context).addToCache(
+                                                  "lastRead", "true");
+                                              await CacheNetwork.addMapToList(
+                                                  widget.surah);
+                                              currentList =
+                                                  await CacheNetwork.loadData();
+                                              print(
+                                                  'Current List: $currentList');
+                                            },
+                                            icon: Icon(
+                                              Icons.bookmark_add_outlined,
+                                              color: Colors.white,
+                                              size: 26.h,
+                                            ),
+                                          ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      "قرآني",
+                                      style: TextStyle(
+                                        fontSize: 23.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
                                       ),
-                                SizedBox(width: 10.w),
-                                Text(
-                                  "قرآني",
-                                  style: TextStyle(
-                                    fontSize: 23.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primary,
+                                    ),
+                                  ],
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(right: 30.w),
+                                  child: Text(
+                                    "قرآني",
+                                    style: TextStyle(
+                                      fontSize: 23.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            )
-                          : Padding(
-                              padding: EdgeInsets.only(right: 30.w),
-                              child: Text(
-                                "قرآني",
-                                style: TextStyle(
-                                  fontSize: 23.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
-                                ),
-                              ),
+                          InkWell(
+                            onTap: () => Navigator.pop(context),
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 25.h,
+                              color: Colors.white,
                             ),
-                      InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 25.h,
-                          color: const Color(0xff8789A3),
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 10.h),
+                    SizedBox(
+                      height: 650.h,
+                      child: PDF(
+                        defaultPage: widget.page,
+                        swipeHorizontal: true,
+                        preventLinkNavigation: true,
+                        fitPolicy: FitPolicy.BOTH,
+                        onPageChanged: (int? current, int? total) =>
+                            _pageCountController
+                                .add('${current! + 1} - $total'),
+                        onViewCreated:
+                            (PDFViewController pdfViewController) async {
+                          _pdfViewController.complete(pdfViewController);
+                          final int currentPage =
+                              await pdfViewController.getCurrentPage() ?? 0;
+                          final int? pageCount =
+                              await pdfViewController.getPageCount();
+                          _pageCountController
+                              .add('${currentPage + 1} - $pageCount');
+                        },
+                      ).fromAsset(
+                        "assets/pdf/${widget.pdfName}.pdf",
+                        loadingWidget: () => const Center(
+                            child: CircularProgressIndicator(
+                                color: AppColors.primary)),
+                        errorWidget: (dynamic error) => const Center(
+                            child: Text("حدث خطأ ما.. حاول مرة اخرى")),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 650.h,
-                  child: PDF(
-                    defaultPage: widget.page,
-                    swipeHorizontal: true,
-                    preventLinkNavigation: true,
-                    fitPolicy: FitPolicy.BOTH,
-                    onPageChanged: (int? current, int? total) =>
-                        _pageCountController.add('${current! + 1} - $total'),
-                    onViewCreated: (PDFViewController pdfViewController) async {
-                      _pdfViewController.complete(pdfViewController);
-                      final int currentPage =
-                          await pdfViewController.getCurrentPage() ?? 0;
-                      final int? pageCount =
-                          await pdfViewController.getPageCount();
-                      _pageCountController
-                          .add('${currentPage + 1} - $pageCount');
-                    },
-                  ).fromAsset(
-                    "assets/pdf/${widget.pdfName}.pdf",
-                    loadingWidget: () => const Center(
-                        child: CircularProgressIndicator(
-                            color: AppColors.primary)),
-                    errorWidget: (dynamic error) =>
-                        const Center(child: Text("حدث خطأ ما.. حاول مرة اخرى")),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           floatingActionButton: FutureBuilder<PDFViewController>(
             future: _pdfViewController.future,

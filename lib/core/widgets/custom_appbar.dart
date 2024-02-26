@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 23.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget {
               },
               child: Icon(
                 Icons.search,
-                color: const Color(0xff8789A3),
+                color: Colors.white,
                 size: 24.h,
               ),
             ),

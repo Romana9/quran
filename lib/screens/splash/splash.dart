@@ -3,8 +3,41 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran/core/colors.dart';
 import 'package:quran/screens/home/home.dart';
 
-class Splash extends StatelessWidget {
+class Splash extends StatefulWidget {
   const Splash({super.key});
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> with TickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Offset> slidingAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1500));
+
+    slidingAnimation =
+        Tween<Offset>(begin: const Offset(1.5, 1.5), end: Offset.zero)
+            .animate(animationController);
+
+    animationController.forward();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const Home()));
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,55 +63,32 @@ class Splash extends StatelessWidget {
                 color: const Color(0xff8789A3),
               ),
             ),
-            SizedBox(height: 49.h),
-            SizedBox(
-              height: 473.h,
-              child: Stack(
-                children: [
-                  Container(
-                    height: 450.h,
-                    width: 314.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/img/splash.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 60.w,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        // await CacheNetwork.insertToCache(
-                        //     key: "lang", value: "ar");
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Home(),
-                            ));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xffF9B091),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        minimumSize: Size(185.w, 60.h),
-                      ),
-                      child: Text(
-                        "ابدأ الأن",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+            SizedBox(height: 40.h),
+            AnimatedBuilder(
+              animation: slidingAnimation,
+              builder: (BuildContext context, Widget? child) {
+                return SlideTransition(
+                  position: slidingAnimation,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.w),
+                    child: SizedBox(
+                      height: 500.h,
+                      child: Container(
+                        height: 500.h,
+                        width: 314.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.r),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/img/splash.png"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            )
+                );
+              },
+            ),
           ],
         ),
       ),

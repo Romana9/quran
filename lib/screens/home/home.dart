@@ -27,45 +27,61 @@ class _HomeState extends State<Home> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Padding(
-            padding: EdgeInsets.only(top: 45.h, right: 24.w, left: 24.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomAppBar(
-                  child: SvgPicture.asset("assets/svg/menu.svg"),
+          body: Stack(
+            children: [
+              SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/img/home.png",
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(height: 24.h),
-                Text(
-                  "السلام عليكم",
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xff023532),
-                  ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 45.h, right: 24.w, left: 24.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomAppBar(
+                      child: SvgPicture.asset(
+                        "assets/svg/menu.svg",
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    Text(
+                      "السلام عليكم",
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    const PrayerTimeContainer(),
+                    SizedBox(height: 24.h),
+                    const CustomRowButtons(),
+                    SizedBox(height: 24.h),
+                    AppCubit.get(context).buttonIndex == 0
+                        ? const SurahListView()
+                        : AppCubit.get(context).buttonIndex == 1
+                            ? const AzkarListView()
+                            : AppCubit.get(context).buttonIndex == 2
+                                ? currentList.isEmpty
+                                    ? SizedBox(
+                                        height: 350.h,
+                                        child: Center(
+                                          child: Lottie.asset(
+                                            'assets/svg/bookmark.json',
+                                          ),
+                                        ),
+                                      )
+                                    : const LastReadListView()
+                                : const QiblahCompass(),
+                  ],
                 ),
-                SizedBox(height: 24.h),
-                const PrayerTimeContainer(),
-                SizedBox(height: 24.h),
-                const CustomRowButtons(),
-                SizedBox(height: 24.h),
-                AppCubit.get(context).buttonIndex == 0
-                    ? const SurahListView()
-                    : AppCubit.get(context).buttonIndex == 1
-                        ? const AzkarListView()
-                        : AppCubit.get(context).buttonIndex == 2
-                            ? currentList.isEmpty
-                                ? SizedBox(
-                                    height: 350.h,
-                                    child: Center(
-                                      child: Lottie.asset(
-                                          'assets/svg/bookmark.json'),
-                                    ),
-                                  )
-                                : const LastReadListView()
-                            : const QiblahCompass(),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

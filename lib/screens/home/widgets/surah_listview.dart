@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
-import 'package:quran/core/colors.dart';
 import '../../surah/surah.dart';
 
 class SurahListView extends StatelessWidget {
@@ -67,7 +66,7 @@ class SurahListView extends StatelessWidget {
                                   "${index + 1}",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: AppColors.primary,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -79,7 +78,7 @@ class SurahListView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.secondray,
+                              color: Colors.white,
                             ),
                           ),
                         ],
