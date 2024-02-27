@@ -61,6 +61,7 @@ class Quran extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+            theme: ThemeData(fontFamily: "TheSans"),
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             title: "قرآني",

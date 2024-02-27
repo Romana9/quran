@@ -44,6 +44,7 @@ dependencies:
   geolocator: ^10.1.0
   intl: ^0.18.1
   lottie: ^3.0.0
+  percent_indicator: ^4.2.3
   shared_preferences: ^2.2.2
   stream_transform: ^2.1.0
   vector_math: ^2.1.4
@@ -76,11 +77,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: TheSans
+      fonts:
+        - asset: assets/fonts/Bahij_TheSansArabicPlain.ttf
+
+    - family: TheSansBold
+      fonts:
+        - asset: assets/fonts/Bahij_TheSansArabic-Bold.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

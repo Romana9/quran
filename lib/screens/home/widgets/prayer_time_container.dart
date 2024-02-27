@@ -20,9 +20,9 @@ class PrayerTimeContainer extends StatefulWidget {
 class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
   List<DateTime> prayerTime = [
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
-        prayerTimes.sunrise.hour, prayerTimes.sunrise.minute),
-    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
         prayerTimes.fajr.hour, prayerTimes.fajr.minute),
+    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
+        prayerTimes.sunrise.hour, prayerTimes.sunrise.minute),
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
         prayerTimes.dhuhr.hour, prayerTimes.dhuhr.minute),
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
@@ -41,18 +41,18 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
     DateTime now = DateTime.now();
     nearestPrayerTime = prayerTime.firstWhere((time) => time.isAfter(now),
         orElse: () => prayerTime.first);
-    nearestTime = DateFormat.jm("en").format(nearestPrayerTime!);
-    if (nearestTime == DateFormat.jm("en").format(prayerTimes.sunrise)) {
+    nearestTime = DateFormat.jm().format(nearestPrayerTime!);
+    if (nearestTime == DateFormat.jm().format(prayerTimes.sunrise)) {
       nearestPrayer = "الشروق";
-    } else if (nearestTime == DateFormat.jm("en").format(prayerTimes.fajr)) {
+    } else if (nearestTime == DateFormat.jm().format(prayerTimes.fajr)) {
       nearestPrayer = "الفجر";
-    } else if (nearestTime == DateFormat.jm("en").format(prayerTimes.dhuhr)) {
+    } else if (nearestTime == DateFormat.jm().format(prayerTimes.dhuhr)) {
       nearestPrayer = "الظهر";
-    } else if (nearestTime == DateFormat.jm("en").format(prayerTimes.asr)) {
+    } else if (nearestTime == DateFormat.jm().format(prayerTimes.asr)) {
       nearestPrayer = "العصر";
-    } else if (nearestTime == DateFormat.jm("en").format(prayerTimes.maghrib)) {
+    } else if (nearestTime == DateFormat.jm().format(prayerTimes.maghrib)) {
       nearestPrayer = "المغرب";
-    } else if (nearestTime == DateFormat.jm("en").format(prayerTimes.isha)) {
+    } else if (nearestTime == DateFormat.jm().format(prayerTimes.isha)) {
       nearestPrayer = "العشاء";
     }
   }
@@ -94,10 +94,6 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                 width: 326.w,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  // gradient: const LinearGradient(colors: [
-                  //   AppColors.primary,
-                  //   AppColors.secondray,
-                  // ]),
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   color: AppColors.primary,
                   image: const DecorationImage(
@@ -122,6 +118,7 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                         fontSize: 25.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "TheSansBold",
                       ),
                     ),
                     nearestPrayerTime != null
@@ -135,15 +132,15 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                         : const CircularProgressIndicator(
                             color: Colors.white,
                           ),
-                    nearestPrayerTime != null
-                        ? Text(
+                    nearestPrayerTime == null || _timeUntil.inHours < 0
+                        ? Container()
+                        : Text(
                             'متبقى : ${_timeUntil.inHours}:${_timeUntil.inMinutes.remainder(60)}:${_timeUntil.inSeconds.remainder(60)}',
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
                             ),
-                          )
-                        : Container(),
+                          ),
                   ],
                 ),
               ),

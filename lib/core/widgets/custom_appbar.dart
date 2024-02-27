@@ -20,24 +20,18 @@ class CustomAppBar extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  child: child,
-                ),
-                SizedBox(width: 24.w),
-                Text(
-                  "قرآني",
-                  style: TextStyle(
-                    fontSize: 23.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            const Spacer(),
+            Text(
+              "قرآني",
+              style: TextStyle(
+                fontSize: 23.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: "TheSansBold",
+              ),
             ),
+            const Spacer(),
             InkWell(
               onTap: () {
                 AppCubit.get(context).search.clear();

@@ -53,6 +53,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primary,
+                fontFamily: "TheSansBold",
               ),
             ),
             SizedBox(height: 16.h),

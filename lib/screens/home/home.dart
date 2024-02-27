@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../core/widgets/custom_appbar.dart';
@@ -38,25 +37,11 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 45.h, right: 24.w, left: 24.w),
+                padding: EdgeInsets.only(top: 50.h, right: 24.w, left: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomAppBar(
-                      child: SvgPicture.asset(
-                        "assets/svg/menu.svg",
-                        color: Colors.white,
-                      ),
-                    ),
-                    // SizedBox(height: 24.h),
-                    // Text(
-                    //   "السلام عليكم",
-                    //   style: TextStyle(
-                    //     fontSize: 24.sp,
-                    //     fontWeight: FontWeight.w600,
-                    //     color: Colors.white,
-                    //   ),
-                    // ),
+                    const CustomAppBar(),
                     SizedBox(height: 24.h),
                     const PrayerTimeContainer(),
                     SizedBox(height: 24.h),

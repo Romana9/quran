@@ -25,7 +25,7 @@ class Search extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 45.h, right: 24.w, left: 24.w),
+                padding: EdgeInsets.only(top: 50.h, right: 24.w, left: 24.w),
                 child: Column(
                   children: [
                     Row(
@@ -37,6 +37,7 @@ class Search extends StatelessWidget {
                             fontSize: 23.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
+                            fontFamily: "TheSansBold",
                           ),
                         ),
                         InkWell(
@@ -62,6 +63,7 @@ class Search extends StatelessWidget {
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
+                                  fontFamily: "TheSansBold",
                                 ),
                               ),
                             ),
@@ -81,7 +83,7 @@ class Search extends StatelessWidget {
                               ),
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: () => Navigator.pushReplacement(
+                                  onTap: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Surah(

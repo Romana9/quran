@@ -37,6 +37,7 @@ class PrayerTime extends StatelessWidget {
                               fontSize: 23.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontFamily: "TheSansBold",
                             ),
                           ),
                         ],
@@ -83,7 +84,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.sunrise),
+                            DateFormat.jm().format(prayerTimes.sunrise),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -124,7 +125,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.fajr),
+                            DateFormat.jm().format(prayerTimes.fajr),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -165,7 +166,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.dhuhr),
+                            DateFormat.jm().format(prayerTimes.dhuhr),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -206,7 +207,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.asr),
+                            DateFormat.jm().format(prayerTimes.asr),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -247,7 +248,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.maghrib),
+                            DateFormat.jm().format(prayerTimes.maghrib),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -288,7 +289,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm('en').format(prayerTimes.isha),
+                            DateFormat.jm().format(prayerTimes.isha),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
