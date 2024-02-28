@@ -77,7 +77,7 @@ class _TasbihState extends State<Tasbih> {
                           widget.data["title"],
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 27.sp,
+                            fontSize: 16.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontFamily: "TheSansBold",
@@ -162,6 +162,7 @@ class _TasbihState extends State<Tasbih> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
@@ -169,6 +170,7 @@ class _TasbihState extends State<Tasbih> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -186,6 +188,7 @@ class _TasbihState extends State<Tasbih> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
@@ -193,6 +196,7 @@ class _TasbihState extends State<Tasbih> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],

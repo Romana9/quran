@@ -29,6 +29,7 @@ class _SurahState extends State<Surah> {
       Completer<PDFViewController>();
   final StreamController<String> _pageCountController =
       StreamController<String>();
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
@@ -79,6 +80,9 @@ class _SurahState extends State<Surah> {
                                           )
                                         : IconButton(
                                             onPressed: () async {
+                                              widget.surah["currentPage"] =
+                                                  currentPage;
+                                              print(widget.surah);
                                               AppCubit.get(context).addToCache(
                                                   "lastRead", "true");
                                               await CacheNetwork.addMapToList(
@@ -137,9 +141,11 @@ class _SurahState extends State<Surah> {
                         swipeHorizontal: true,
                         preventLinkNavigation: true,
                         fitPolicy: FitPolicy.BOTH,
-                        onPageChanged: (int? current, int? total) =>
-                            _pageCountController
-                                .add('${current! + 1} - $total'),
+                        onPageChanged: (int? current, int? total) {
+                          _pageCountController.add('${current! + 1} - $total');
+                          currentPage = current;
+                          print(currentPage);
+                        },
                         onViewCreated:
                             (PDFViewController pdfViewController) async {
                           _pdfViewController.complete(pdfViewController);

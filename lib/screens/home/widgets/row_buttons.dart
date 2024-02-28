@@ -45,7 +45,7 @@ class CustomRowButtons extends StatelessWidget {
                       color: AppCubit.get(context).buttonIndex == 0
                           ? Colors.white
                           : const Color(0xff8789A3),
-                      fontSize: 19.sp,
+                      fontSize: 20.sp,
                       fontFamily: AppCubit.get(context).buttonIndex == 0
                           ? "TheSansBold"
                           : "TheSans",
@@ -76,7 +76,7 @@ class CustomRowButtons extends StatelessWidget {
                       color: AppCubit.get(context).buttonIndex == 1
                           ? Colors.white
                           : const Color(0xff8789A3),
-                      fontSize: 19.sp,
+                      fontSize: 20.sp,
                       fontFamily: AppCubit.get(context).buttonIndex == 1
                           ? "TheSansBold"
                           : "TheSans",
@@ -107,7 +107,7 @@ class CustomRowButtons extends StatelessWidget {
                       color: AppCubit.get(context).buttonIndex == 2
                           ? Colors.white
                           : const Color(0xff8789A3),
-                      fontSize: 19.sp,
+                      fontSize: 20.sp,
                       fontFamily: AppCubit.get(context).buttonIndex == 2
                           ? "TheSansBold"
                           : "TheSans",
@@ -138,7 +138,7 @@ class CustomRowButtons extends StatelessWidget {
                       color: AppCubit.get(context).buttonIndex == 3
                           ? Colors.white
                           : const Color(0xff8789A3),
-                      fontSize: 19.sp,
+                      fontSize: 20.sp,
                       fontFamily: AppCubit.get(context).buttonIndex == 3
                           ? "TheSansBold"
                           : "TheSans",
@@ -172,7 +172,7 @@ class CustomRowButtons extends StatelessWidget {
                       color: AppCubit.get(context).buttonIndex == 4
                           ? Colors.white
                           : const Color(0xff8789A3),
-                      fontSize: 19.sp,
+                      fontSize: 20.sp,
                       fontFamily: AppCubit.get(context).buttonIndex == 4
                           ? "TheSansBold"
                           : "TheSans",

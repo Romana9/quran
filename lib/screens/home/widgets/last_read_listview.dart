@@ -32,7 +32,8 @@ class LastReadListView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Surah(
-                              page: currentList[index]["page"],
+                              page: currentList[index]["currentPage"] ??
+                                  currentList[index]["page"],
                               name: currentList[index]["name"],
                               surah: currentList[index],
                               pdfName: 'quran',

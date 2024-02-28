@@ -92,8 +92,8 @@ class TasbihListView extends StatelessWidget {
                                       AppCubit.get(context).tasbih[index]
                                           ["title"],
                                       style: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.sp,
+                                        // fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: "TheSansBold",
                                       ),
