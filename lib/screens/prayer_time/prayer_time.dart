@@ -76,7 +76,7 @@ class PrayerTime extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "الشروق",
+                            "الفجر",
                             style: TextStyle(
                               fontSize: 25.sp,
                               color: Colors.white,
@@ -84,7 +84,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm().format(prayerTimes.sunrise),
+                            DateFormat.jm().format(prayerTimes.fajr),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,
@@ -117,7 +117,7 @@ class PrayerTime extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "الفجر",
+                            "الشروق",
                             style: TextStyle(
                               fontSize: 25.sp,
                               color: Colors.white,
@@ -125,7 +125,7 @@ class PrayerTime extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            DateFormat.jm().format(prayerTimes.fajr),
+                            DateFormat.jm().format(prayerTimes.sunrise),
                             style: TextStyle(
                               fontSize: 23.sp,
                               color: Colors.white,

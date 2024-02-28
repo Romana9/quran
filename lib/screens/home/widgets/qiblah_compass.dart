@@ -37,6 +37,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 430.h,
       alignment: Alignment.center,
       child: StreamBuilder(
         stream: stream,
@@ -76,26 +77,17 @@ class _QiblahCompassState extends State<QiblahCompass> {
                           angle: (qiblahDirection.direction * (pi / 180) * -1),
                           child: SvgPicture.asset(
                             'assets/svg/compass.svg',
-                            height: 350.h,
+                            height: 380.h,
                             color: Colors.white,
                           ),
                         ),
                         Transform.rotate(
                           angle: (qiblahDirection.qiblah * (pi / 180) * -1),
-                          alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/svg/needle.svg',
-                            fit: BoxFit.contain,
-                            height: 350.h,
-                            alignment: Alignment.center,
+                            height: 380.h,
                           ),
                         ),
-                        Positioned(
-                          bottom: -5.h,
-                          right: 30.w,
-                          child: Text(
-                              "${qiblahDirection.offset.toStringAsFixed(2)}°"),
-                        )
                       ],
                     );
                   },
