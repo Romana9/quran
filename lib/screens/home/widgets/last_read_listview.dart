@@ -17,7 +17,7 @@ class LastReadListView extends StatelessWidget {
         return Expanded(
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(0),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 20.h),
             itemCount: currentList.length,
             separatorBuilder: (BuildContext context, int index) => SizedBox(
               width: 326.w,

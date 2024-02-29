@@ -37,11 +37,14 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50.h, right: 24.w, left: 24.w),
+                padding: EdgeInsets.only(top: 50.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomAppBar(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      child: const CustomAppBar(),
+                    ),
                     SizedBox(height: 24.h),
                     const PrayerTimeContainer(),
                     SizedBox(height: 24.h),
