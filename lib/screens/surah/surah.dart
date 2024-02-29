@@ -1,9 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
+
 import '../../core/Cache/local_network.dart';
 import '../../core/colors.dart';
 import '../../main.dart';
@@ -27,9 +29,11 @@ class Surah extends StatefulWidget {
 class _SurahState extends State<Surah> {
   final Completer<PDFViewController> _pdfViewController =
       Completer<PDFViewController>();
+  int pageCount = 0;
   final StreamController<String> _pageCountController =
       StreamController<String>();
   int currentPage = 0;
+  bool reversedDefaultPage = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
@@ -81,7 +85,7 @@ class _SurahState extends State<Surah> {
                                         : IconButton(
                                             onPressed: () async {
                                               widget.surah["currentPage"] =
-                                                  currentPage;
+                                                  pageCount - currentPage - 1;
                                               print(widget.surah);
                                               AppCubit.get(context).addToCache(
                                                   "lastRead", "true");
@@ -141,18 +145,24 @@ class _SurahState extends State<Surah> {
                         swipeHorizontal: true,
                         preventLinkNavigation: true,
                         fitPolicy: FitPolicy.BOTH,
-                        onPageChanged: (int? current, int? total) {
+                        onPageChanged: (int? current, int? total) async {
+                          pageCount = total!;
+                          if (!reversedDefaultPage) {
+                            final pdfController =
+                                await _pdfViewController.future;
+                            pdfController.setPage(total - widget.page - 1);
+                            reversedDefaultPage = true;
+                            return;
+                          }
                           _pageCountController.add('${current! + 1} - $total');
                           currentPage = current;
-                          print(currentPage);
+                          print('page changed $currentPage');
                         },
                         onViewCreated:
                             (PDFViewController pdfViewController) async {
                           _pdfViewController.complete(pdfViewController);
                           final int currentPage =
                               await pdfViewController.getCurrentPage() ?? 0;
-                          final int? pageCount =
-                              await pdfViewController.getPageCount();
                           _pageCountController
                               .add('${currentPage + 1} - $pageCount');
                         },
