@@ -13,6 +13,7 @@ import '../../main.dart';
 class Surah extends StatefulWidget {
   final Map surah;
   final int page;
+  final int index;
   final String name;
   final String pdfName;
   const Surah(
@@ -20,7 +21,8 @@ class Surah extends StatefulWidget {
       required this.page,
       required this.name,
       required this.surah,
-      required this.pdfName});
+      required this.pdfName,
+      required this.index});
 
   @override
   State<Surah> createState() => _SurahState();
@@ -86,7 +88,6 @@ class _SurahState extends State<Surah> {
                                             onPressed: () async {
                                               widget.surah["currentPage"] =
                                                   pageCount - currentPage - 1;
-                                              print(widget.surah);
                                               AppCubit.get(context).addToCache(
                                                   "lastRead", "true");
                                               await CacheNetwork.addMapToList(
@@ -141,7 +142,7 @@ class _SurahState extends State<Surah> {
                     SizedBox(
                       height: 650.h,
                       child: PDF(
-                        defaultPage: widget.page,
+                        defaultPage: widget.page == 0 ? 1 : widget.page,
                         swipeHorizontal: true,
                         preventLinkNavigation: true,
                         fitPolicy: FitPolicy.BOTH,

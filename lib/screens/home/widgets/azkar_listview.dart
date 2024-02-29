@@ -36,6 +36,7 @@ class AzkarListView extends StatelessWidget {
                               surah: AppCubit.get(context).azkar[index],
                               pdfName: AppCubit.get(context).azkar[index]
                                   ["pdfName"],
+                              index: index,
                             ))),
                 child: SizedBox(
                   height: 62.h,

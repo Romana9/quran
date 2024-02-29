@@ -1,6 +1,10 @@
 PODS:
+  - alarm (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_compass (0.0.1):
+    - Flutter
+  - flutter_fgbg (0.0.1):
     - Flutter
   - flutter_pdfview (1.0.2):
     - Flutter
@@ -19,8 +23,10 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - alarm (from `.symlinks/plugins/alarm/ios`)
   - Flutter (from `Flutter`)
   - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
+  - flutter_fgbg (from `.symlinks/plugins/flutter_fgbg/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - flutter_qiblah (from `.symlinks/plugins/flutter_qiblah/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
@@ -29,10 +35,14 @@ DEPENDENCIES:
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
 
 EXTERNAL SOURCES:
+  alarm:
+    :path: ".symlinks/plugins/alarm/ios"
   Flutter:
     :path: Flutter
   flutter_compass:
     :path: ".symlinks/plugins/flutter_compass/ios"
+  flutter_fgbg:
+    :path: ".symlinks/plugins/flutter_fgbg/ios"
   flutter_pdfview:
     :path: ".symlinks/plugins/flutter_pdfview/ios"
   flutter_qiblah:
@@ -47,8 +57,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/darwin"
 
 SPEC CHECKSUMS:
+  alarm: 6c1f6a9688f94cd6bf8f104c67cc26e78c9d8d13
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
+  flutter_fgbg: 31c0d1140a131daea2d342121808f6aa0dcd879d
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_qiblah: f69eeb708d127a2634073ab1f27771c979928f50
   geolocator_apple: 9157311f654584b9bb72686c55fc02a97b73f461

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adhan: ^2.0.0+1
+  alarm: ^3.0.12
   bloc: ^8.1.2
   cupertino_icons: ^1.0.2
   flutter:

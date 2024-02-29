@@ -94,6 +94,7 @@ class Search extends StatelessWidget {
                                                 surah: AppCubit.get(context)
                                                     .search[index],
                                                 pdfName: 'quran',
+                                                index: index,
                                               ))),
                                   child: SizedBox(
                                     height: 62.h,
@@ -106,30 +107,28 @@ class Search extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Stack(
-                                              children: [
-                                                SvgPicture.asset(
-                                                  "assets/svg/aya.svg",
-                                                  height: 42.h,
-                                                  width: 42.w,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                Positioned(
-                                                  right: index + 1 < 10
-                                                      ? 17.w
-                                                      : index + 1 < 100
-                                                          ? 13.w
-                                                          : 8.5.w,
-                                                  top: 10.h,
-                                                  child: Text(
-                                                    "${index + 1}",
-                                                    style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      color: Colors.white,
+                                            SizedBox(
+                                              height: 42.h,
+                                              width: 42.h,
+                                              child: Stack(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    "assets/svg/aya.svg",
+                                                    height: 42.h,
+                                                    width: 42.h,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      "${index + 1}",
+                                                      style: TextStyle(
+                                                        fontSize: 14.sp,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                             SizedBox(width: 16.w),
                                             Text(

@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ late PrayerTimes prayerTimes;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Alarm.init();
   await CacheNetwork.cacheInitilzation();
   currentList = await CacheNetwork.loadData();
   position = await LocationHelper.determinePosition();
@@ -38,11 +40,110 @@ void main() async {
   print(DateFormat.jm().format(prayerTimes.maghrib));
   print(DateFormat.jm().format(prayerTimes.isha));
 
+  Alarm.set(
+    alarmSettings: AlarmSettings(
+      id: 1,
+      dateTime: prayerTimes.fajr,
+      // DateTime(
+      //   DateTime.now().year,
+      //   DateTime.now().month,
+      //   DateTime.now().day,
+      //   DateTime.now().hour,
+      //   DateTime.now().minute,
+      //   DateTime.now().second + 10,
+      // ),
+      assetAudioPath: 'assets/pdf/fajr.mp3',
+      loopAudio: false,
+      vibrate: true,
+      volume: 0.8,
+      fadeDuration: 3.0,
+      notificationTitle: 'الأذان',
+      notificationBody: 'حان الأن موعد الأذان',
+      enableNotificationOnKill: true,
+    ),
+  );
+  Alarm.set(
+    alarmSettings: AlarmSettings(
+      id: 2,
+      dateTime: prayerTimes.dhuhr,
+      assetAudioPath: 'assets/pdf/adhan.mp3',
+      loopAudio: false,
+      vibrate: true,
+      volume: 0.8,
+      fadeDuration: 3.0,
+      notificationTitle: 'الأذان',
+      notificationBody: 'حان الأن موعد الأذان',
+      enableNotificationOnKill: true,
+    ),
+  );
+  Alarm.set(
+    alarmSettings: AlarmSettings(
+      id: 3,
+      dateTime: prayerTimes.asr,
+      assetAudioPath: 'assets/pdf/adhan.mp3',
+      loopAudio: false,
+      vibrate: true,
+      volume: 0.8,
+      fadeDuration: 3.0,
+      notificationTitle: 'الأذان',
+      notificationBody: 'حان الأن موعد الأذان',
+      enableNotificationOnKill: true,
+    ),
+  );
+  Alarm.set(
+    alarmSettings: AlarmSettings(
+      id: 4,
+      dateTime: prayerTimes.maghrib,
+      assetAudioPath: 'assets/pdf/adhan.mp3',
+      loopAudio: false,
+      vibrate: true,
+      volume: 0.8,
+      fadeDuration: 3.0,
+      notificationTitle: 'الأذان',
+      notificationBody: 'حان الأن موعد الأذان',
+      enableNotificationOnKill: true,
+    ),
+  );
+  Alarm.set(
+    alarmSettings: AlarmSettings(
+      id: 5,
+      dateTime: prayerTimes.isha,
+      assetAudioPath: 'assets/pdf/adhan.mp3',
+      loopAudio: false,
+      vibrate: true,
+      volume: 0.8,
+      fadeDuration: 3.0,
+      notificationTitle: 'الأذان',
+      notificationBody: 'حان الأن موعد الأذان',
+      enableNotificationOnKill: true,
+    ),
+  );
+
   runApp(const Quran());
 }
 
-class Quran extends StatelessWidget {
+class Quran extends StatefulWidget {
   const Quran({super.key});
+
+  @override
+  State<Quran> createState() => _QuranState();
+}
+
+class _QuranState extends State<Quran> {
+  late List<AlarmSettings> alarms;
+
+  @override
+  void initState() {
+    super.initState();
+    loadAlarms();
+  }
+
+  void loadAlarms() {
+    setState(() {
+      alarms = Alarm.getAlarms();
+      alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
