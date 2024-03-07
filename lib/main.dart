@@ -1,16 +1,19 @@
 import 'package:adhan/adhan.dart';
 import 'package:alarm/alarm.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:quran/firebase_options.dart';
 import 'package:quran/generated/l10n.dart';
 import 'core/Cache/local_network.dart';
 import 'core/app_cubit/app_cubit.dart';
 import 'core/constants.dart';
 import 'core/location_helper.dart';
+import 'core/notification.dart';
 import 'screens/splash/splash.dart';
 
 List currentList = [];
@@ -21,6 +24,8 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Alarm.init();
   await CacheNetwork.cacheInitilzation();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationHelper.init();
   currentList = await CacheNetwork.loadData();
   position = await LocationHelper.determinePosition();
   print("currentList is $currentList");
@@ -48,8 +53,19 @@ void main() async {
   runApp(const Quran());
 }
 
-class Quran extends StatelessWidget {
+class Quran extends StatefulWidget {
   const Quran({super.key});
+
+  @override
+  State<Quran> createState() => _QuranState();
+}
+
+class _QuranState extends State<Quran> {
+  @override
+  void initState() {
+    NotificationHelper.onInit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

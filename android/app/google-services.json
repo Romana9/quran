@@ -1,26 +1,126 @@
 {
   "project_info": {
-    "project_number": "1020094490435",
-    "project_id": "khaled-9ecc5",
-    "storage_bucket": "khaled-9ecc5.appspot.com"
+    "project_number": "352433770948",
+    "project_id": "quran-978e9",
+    "storage_bucket": "quran-978e9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1020094490435:android:63961a4ec3ff7762cfb1f6",
+        "mobilesdk_app_id": "1:352433770948:android:3c3e5bdc37b3a56e499491",
         "android_client_info": {
-          "package_name": "com.efadh.quran"
+          "package_name": "com.efadh.alquraan_alkareem"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqpkvVn2pm5lcgo-1pP1rpmkD5dVzoSps"
+          "current_key": "AIzaSyBwmefaRTm17iLAd3d6SKiiVhzWjZss_Ao"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352433770948-ldl0ikn49gdbba2nf8igv1fuofr9101a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.efadh.quraan",
+                "app_store_id": "1603915644"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352433770948:android:90800f198b028010499491",
+        "android_client_info": {
+          "package_name": "com.efadh.quraan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352433770948-dlos2la0labf65v9ofn78j6h43ut993g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.efadh.quraan",
+            "certificate_hash": "0b1a0f45116c859b882fd0ca3664188413a90030"
+          }
+        },
+        {
+          "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwmefaRTm17iLAd3d6SKiiVhzWjZss_Ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352433770948-ldl0ikn49gdbba2nf8igv1fuofr9101a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.efadh.quraan",
+                "app_store_id": "1603915644"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352433770948:android:548cd3462c63e407499491",
+        "android_client_info": {
+          "package_name": "com.efadh.quran"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwmefaRTm17iLAd3d6SKiiVhzWjZss_Ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352433770948-buk2f2eu0rviv3n03c11fvufvi552mda.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352433770948-ldl0ikn49gdbba2nf8igv1fuofr9101a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.efadh.quraan",
+                "app_store_id": "1603915644"
+              }
+            }
+          ]
         }
       }
     }
