@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:jhijri/jHijri.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../../core/colors.dart';
+import '../../../core/constants.dart';
 import '../../../main.dart';
 import '../../prayer_time/prayer_time.dart';
 
@@ -76,6 +78,20 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
     });
   }
 
+  final String _jHijriDate = "${JHijri(
+    fYear: JHijri.now().year,
+    fMonth: JHijri.now().month,
+    fDay: JHijri.now().day,
+  ).day} ${JHijri(
+    fYear: JHijri.now().year,
+    fMonth: JHijri.now().month,
+    fDay: JHijri.now().day,
+  ).monthName} ${JHijri(
+    fYear: JHijri.now().year,
+    fMonth: JHijri.now().month,
+    fDay: JHijri.now().day,
+  ).year}";
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
@@ -90,13 +106,14 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 131.h,
-                width: 326.w,
+                width: 350.w,
                 clipBehavior: Clip.antiAlias,
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   color: AppColors.primary,
                   image: const DecorationImage(
+                    opacity: 0.5,
                     fit: BoxFit.fill,
                     image: AssetImage("assets/img/home.png"),
                   ),
@@ -109,38 +126,93 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                     ),
                   ],
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      nearestPrayer,
-                      style: TextStyle(
-                        fontSize: 25.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "TheSansBold",
+                    SizedBox(
+                      width: 165.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            nearestPrayer,
+                            style: TextStyle(
+                              fontSize: 25.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "TheSansBold",
+                            ),
+                          ),
+                          nearestPrayerTime != null
+                              ? Text(
+                                  nearestTime!,
+                                  style: TextStyle(
+                                    fontSize: 30.sp,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                          nearestPrayerTime == null || _timeUntil.inHours < 0
+                              ? Container()
+                              : Text(
+                                  'متبقى : ${_timeUntil.inHours}:${_timeUntil.inMinutes.remainder(60)}:${_timeUntil.inSeconds.remainder(60)}',
+                                  style: TextStyle(
+                                    fontSize: 23.sp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                        ],
                       ),
                     ),
-                    nearestPrayerTime != null
-                        ? Text(
-                            nearestTime!,
-                            style: TextStyle(
-                              fontSize: 30.sp,
-                              color: Colors.white,
-                            ),
-                          )
-                        : const CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                    nearestPrayerTime == null || _timeUntil.inHours < 0
-                        ? Container()
-                        : Text(
-                            'متبقى : ${_timeUntil.inHours}:${_timeUntil.inMinutes.remainder(60)}:${_timeUntil.inSeconds.remainder(60)}',
-                            style: TextStyle(
-                              fontSize: 23.sp,
-                              color: Colors.white,
-                            ),
-                          ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 7.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: city == null
+                            ? [
+                                Text(
+                                  _jHijriDate,
+                                  style: TextStyle(
+                                    fontSize: 21.sp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ]
+                            : [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.white,
+                                      size: 21.r,
+                                    ),
+                                    Text(
+                                      city!,
+                                      style: TextStyle(
+                                        fontSize: 21.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20.h),
+                                Text(
+                                  _jHijriDate,
+                                  style: TextStyle(
+                                    fontSize: 21.sp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                      ),
+                    )
                   ],
                 ),
               ),

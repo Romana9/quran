@@ -8,3 +8,7 @@ final class AppInitial extends AppState {}
 final class ButtonIndexState extends AppState {}
 
 final class UpdateCache extends AppState {}
+
+final class UpdateLocationLoading extends AppState {}
+
+final class UpdateLocatingSuccess extends AppState {}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran/core/colors.dart';
-import 'package:quran/screens/home/home.dart';
+
+import '../home_layout/home_layout.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -17,7 +18,7 @@ class _SplashState extends State<Splash> {
 
     Future.delayed(const Duration(milliseconds: 1200), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Home()));
+          context, MaterialPageRoute(builder: (context) => const HomeLayout()));
     });
   }
 

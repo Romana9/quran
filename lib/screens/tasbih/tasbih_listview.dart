@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import 'package:quran/screens/tasbih/tasbih.dart';
 
+import '../../core/widgets/custom_appbar.dart';
+
 class TasbihListView extends StatelessWidget {
   const TasbihListView({super.key});
 
@@ -24,30 +26,7 @@ class TasbihListView extends StatelessWidget {
             padding: EdgeInsets.only(top: 50.h, right: 24.w, left: 24.w),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Spacer(),
-                    Text(
-                      "تسابيح",
-                      style: TextStyle(
-                        fontSize: 23.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: "TheSansBold",
-                      ),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 25.h,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
+                const CustomAppBar(),
                 SizedBox(height: 24.h),
                 Expanded(
                   child: ListView.separated(

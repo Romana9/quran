@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:meta/meta.dart';
 
 import '../Cache/local_network.dart';
+import '../constants.dart';
 // import 'package:http/http.dart' as http;
 part 'app_state.dart';
 
@@ -773,4 +775,12 @@ class AppCubit extends Cubit<AppState> {
       "makkia": 1,
     }
   ];
+
+  updateLocation() async {
+    emit(UpdateLocationLoading());
+    final placemarks = await placemarkFromCoordinates(lat!, lng!);
+    city = placemarks[0].locality;
+    print("city is $city");
+    emit(UpdateLocatingSuccess());
+  }
 }

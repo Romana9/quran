@@ -45,10 +45,14 @@ dependencies:
   flutter_qiblah: ^2.2.1
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
+  fluttertoast: ^8.2.4
+  geocoding: ^2.2.0
   geolocator: ^10.1.0
   intl: ^0.18.1
+  jhijri: ^1.0.0
   lottie: ^3.0.0
   percent_indicator: ^4.2.3
+  persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.2.2
   stream_transform: ^2.1.0
   vector_math: ^2.1.4
