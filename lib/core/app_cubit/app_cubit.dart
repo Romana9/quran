@@ -20,6 +20,13 @@ class AppCubit extends Cubit<AppState> {
     emit(ButtonIndexState());
   }
 
+  int buttomNavIndex = 0;
+
+  buttomNavIndexFun(index) {
+    buttomNavIndex = index;
+    emit(ButtonIndexState());
+  }
+
   addToCache(String key, String newValue) async {
     await CacheNetwork.insertToCache(key: key, value: newValue);
     emit(UpdateCache());
@@ -78,15 +85,28 @@ class AppCubit extends Cubit<AppState> {
   List azkar = [
     {
       "page": 0,
-      "name": "الأذكار",
-      "pageNum": 30,
-      "pdfName": "bookor",
+      "name": "أذكار الصباح",
+      "pageNum": 16,
     },
     {
-      "page": 0,
-      "name": "أذكار الصباح والمساء",
-      "pageNum": 4,
-      "pdfName": "morning",
+      "page": 16,
+      "name": "أذكار المساء",
+      "pageNum": 9,
+    },
+    {
+      "page": 24,
+      "name": "دعاء الهم و الحزن",
+      "pageNum": 2,
+    },
+    {
+      "page": 26,
+      "name": "دعاء صلاة الاستخارة",
+      "pageNum": 1,
+    },
+    {
+      "page": 27,
+      "name": "دعاء ختم القرآن",
+      "pageNum": 2,
     },
   ];
   List surah = [

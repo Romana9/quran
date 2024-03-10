@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
+import 'package:share/share.dart';
 import '../../screens/search/search.dart';
 import '../colors.dart';
 
@@ -21,6 +23,16 @@ class CustomAppBar extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
+            InkWell(
+              onTap: () {
+                Share.share("http://onelink.to/k5eqch");
+              },
+              child: Icon(
+                Icons.share,
+                color: Colors.white,
+                size: 24.h,
+              ),
+            ),
             const Spacer(),
             Text(
               "قرآني",
@@ -80,8 +92,12 @@ class CustomAppBar extends StatelessWidget {
                     .toList();
                 print(AppCubit.get(context).search);
                 Navigator.of(context).pop(false);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Search()));
+                PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const Search(),
+                  withNavBar: true,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
                 _searchController.clear();
               },
               style: TextStyle(fontSize: 16.sp),
@@ -126,8 +142,12 @@ class CustomAppBar extends StatelessWidget {
                       .toList();
                   print(AppCubit.get(context).search);
                   Navigator.of(context).pop(false);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Search()));
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const Search(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                   _searchController.clear();
                 },
                 child: Text(

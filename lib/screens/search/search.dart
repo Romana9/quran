@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../surah/surah.dart';
 
@@ -83,19 +84,23 @@ class Search extends StatelessWidget {
                               ),
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Surah(
-                                                page: AppCubit.get(context)
-                                                    .search[index]["page"],
-                                                name: AppCubit.get(context)
-                                                    .search[index]["name"],
-                                                surah: AppCubit.get(context)
-                                                    .search[index],
-                                                pdfName: 'quran',
-                                                index: index,
-                                              ))),
+                                  onTap: () =>
+                                      PersistentNavBarNavigator.pushNewScreen(
+                                    context,
+                                    screen: Surah(
+                                      page: AppCubit.get(context).search[index]
+                                          ["page"],
+                                      name: AppCubit.get(context).search[index]
+                                          ["name"],
+                                      surah:
+                                          AppCubit.get(context).search[index],
+                                      pdfName: 'quran',
+                                      index: index,
+                                    ),
+                                    withNavBar: false,
+                                    pageTransitionAnimation:
+                                        PageTransitionAnimation.cupertino,
+                                  ),
                                   child: SizedBox(
                                     height: 62.h,
                                     width: 342.w,

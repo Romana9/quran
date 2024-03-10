@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../core/app_cubit/app_cubit.dart';
 import '../../../core/widgets/custom_appbar.dart';
 import '../../surah/surah.dart';
@@ -50,20 +51,22 @@ class AzkarListView extends StatelessWidget {
                         ),
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Surah(
-                                          page: AppCubit.get(context)
-                                              .azkar[index]["page"],
-                                          name: AppCubit.get(context)
-                                              .azkar[index]["name"],
-                                          surah: AppCubit.get(context)
-                                              .azkar[index],
-                                          pdfName: AppCubit.get(context)
-                                              .azkar[index]["pdfName"],
-                                          index: index,
-                                        ))),
+                            onTap: () =>
+                                PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: Surah(
+                                page: AppCubit.get(context).azkar[index]
+                                    ["page"],
+                                name: AppCubit.get(context).azkar[index]
+                                    ["name"],
+                                surah: AppCubit.get(context).azkar[index],
+                                pdfName: "azkar",
+                                index: index,
+                              ),
+                              withNavBar: false,
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.cupertino,
+                            ),
                             child: SizedBox(
                               height: 62.h,
                               width: 342.w,
@@ -74,10 +77,28 @@ class AzkarListView extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      SvgPicture.asset(
-                                        "assets/svg/aya.svg",
-                                        height: 30.h,
-                                        fit: BoxFit.cover,
+                                      SizedBox(
+                                        height: 42.h,
+                                        width: 42.h,
+                                        child: Stack(
+                                          children: [
+                                            SvgPicture.asset(
+                                              "assets/svg/aya.svg",
+                                              height: 42.h,
+                                              width: 42.h,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                "${index + 1}",
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(width: 16.w),
                                       Text(

@@ -56,9 +56,10 @@ class _QiblahCompassState extends State<QiblahCompass> {
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: const CustomAppBar(),
                 ),
-                SizedBox(height: 100.h),
+                const Spacer(),
                 Container(
                   height: 430.h,
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
                   alignment: Alignment.center,
                   child: StreamBuilder(
                     stream: stream,
@@ -143,6 +144,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                     },
                   ),
                 ),
+                const Spacer(),
               ],
             ),
           ),

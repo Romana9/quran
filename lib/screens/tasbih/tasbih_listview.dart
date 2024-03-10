@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import 'package:quran/screens/tasbih/tasbih.dart';
 
@@ -43,12 +44,15 @@ class TasbihListView extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Tasbih(
-                                      data: AppCubit.get(context).tasbih[index],
-                                    ))),
+                        onTap: () => PersistentNavBarNavigator.pushNewScreen(
+                          context,
+                          screen: Tasbih(
+                            data: AppCubit.get(context).tasbih[index],
+                          ),
+                          withNavBar: true,
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
+                        ),
                         child: Container(
                           width: 342.w,
                           padding: EdgeInsets.symmetric(vertical: 10.h),

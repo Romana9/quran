@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../../core/widgets/custom_appbar.dart';
 import '../../../main.dart';
@@ -38,25 +39,25 @@ class LastReadListView extends StatelessWidget {
                     SizedBox(height: 24.h),
                     currentList.isEmpty
                         ? Padding(
-                          padding: EdgeInsets.only(top: 50.h),
-                          child: Column(
-                            children: [
-                              Lottie.asset(
-                                'assets/svg/bookmark.json',
-                              ),
-                              Text(
-                                "لم تضف سور",
-                                style: TextStyle(
-                                  fontSize: 32.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.italic,
-                                  fontFamily: "TheSansBold",
+                            padding: EdgeInsets.only(top: 50.h),
+                            child: Column(
+                              children: [
+                                Lottie.asset(
+                                  'assets/svg/bookmark.json',
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
+                                Text(
+                                  "لم تضف سور",
+                                  style: TextStyle(
+                                    fontSize: 32.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: "TheSansBold",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
                         : Expanded(
                             child: ListView.separated(
                               physics: const BouncingScrollPhysics(),
@@ -73,19 +74,21 @@ class LastReadListView extends StatelessWidget {
                               ),
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Surah(
-                                                page: currentList[index]
-                                                        ["currentPage"] ??
-                                                    currentList[index]["page"],
-                                                name: currentList[index]
-                                                    ["name"],
-                                                surah: currentList[index],
-                                                pdfName: 'quran',
-                                                index: index,
-                                              ))),
+                                  onTap: () =>
+                                      PersistentNavBarNavigator.pushNewScreen(
+                                    context,
+                                    screen: Surah(
+                                      page: currentList[index]["currentPage"] ??
+                                          currentList[index]["page"],
+                                      name: currentList[index]["name"],
+                                      surah: currentList[index],
+                                      pdfName: 'quran',
+                                      index: index,
+                                    ),
+                                    withNavBar: false,
+                                    pageTransitionAnimation:
+                                        PageTransitionAnimation.cupertino,
+                                  ),
                                   child: SizedBox(
                                     height: 62.h,
                                     width: 342.w,

@@ -53,7 +53,7 @@ class _SurahState extends State<Surah> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 45.h),
+                padding: EdgeInsets.only(top: 50.h),
                 child: Column(
                   children: [
                     Padding(

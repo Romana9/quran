@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:jhijri/jHijri.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
 import '../../../core/colors.dart';
 import '../../../core/constants.dart';
@@ -99,8 +100,12 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const PrayerTime()));
+            PersistentNavBarNavigator.pushNewScreen(
+              context,
+              screen: const PrayerTime(),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -175,42 +180,38 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: city == null
-                            ? [
-                                Text(
-                                  _jHijriDate,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.white,
+                                size: 23.r,
+                              ),
+                              SizedBox(
+                                width: 120.w,
+                                child: Text(
+                                  city ?? "",
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontSize: 21.sp,
                                     color: Colors.white,
                                   ),
                                 ),
-                              ]
-                            : [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      color: Colors.white,
-                                      size: 21.r,
-                                    ),
-                                    Text(
-                                      city!,
-                                      style: TextStyle(
-                                        fontSize: 21.sp,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 20.h),
-                                Text(
-                                  _jHijriDate,
-                                  style: TextStyle(
-                                    fontSize: 21.sp,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20.h),
+                          Text(
+                            _jHijriDate,
+                            style: TextStyle(
+                              fontSize: 21.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   ],

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/colors.dart';
 import '../home/home.dart';
@@ -31,45 +31,44 @@ class HomeLayout extends StatelessWidget {
     List<PersistentBottomNavBarItem> navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.home),
+          icon: SvgPicture.asset("assets/svg/home.svg"),
           iconSize: 24.h,
           title: (" الرئيسية"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: const Color(0xff8789A3),
-          contentPadding: 0,
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.star),
+          icon: SvgPicture.asset("assets/svg/doaa.svg"),
           iconSize: 24.h,
           title: (" الأذكار"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: const Color(0xff8789A3),
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.cart),
+          icon: SvgPicture.asset("assets/svg/lastRead.svg"),
           iconSize: 24.h,
           title: (' آخر قراءة'),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: const Color(0xff8789A3),
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.person),
+          icon: SvgPicture.asset("assets/svg/mosque.svg"),
           iconSize: 24.h,
           title: (" القبلة"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: const Color(0xff8789A3),
+          inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.person),
+          icon: SvgPicture.asset("assets/svg/tasbih.svg"),
           iconSize: 24.h,
           title: (" التسبيح"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
-          inactiveColorPrimary: const Color(0xff8789A3),
+          inactiveColorPrimary: Colors.white,
         ),
       ];
     }
@@ -77,15 +76,18 @@ class HomeLayout extends StatelessWidget {
     return PersistentTabView(
       context,
       controller: controller,
-      navBarHeight: 60.h,
+      navBarHeight: 75.h,
       backgroundColor: AppColors.primary,
       screens: buildScreens(),
       items: navBarsItems(),
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      resizeToAvoidBottomInset: true,
+      hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        colorBehindNavBar: Colors.white,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(15.r),
+          topLeft: Radius.circular(15.r),
+        ),
+        colorBehindNavBar: AppColors.primary,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade400,
