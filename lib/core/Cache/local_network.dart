@@ -13,8 +13,17 @@ class CacheNetwork {
     return await sharedPreferences.setString(key, value);
   }
 
+  static Future<bool> insertNumToCache(
+      {required String key, required double value}) async {
+    return await sharedPreferences.setDouble(key, value);
+  }
+
   static String getCacheData({required String key}) {
     return sharedPreferences.getString(key) ?? "";
+  }
+
+  static double getNumCacheData({required String key}) {
+    return sharedPreferences.getDouble(key) ?? 0;
   }
 
   static Future<bool> deleteCacheData({required String key}) {
@@ -23,6 +32,10 @@ class CacheNetwork {
 
   static Future<bool> update({required String key, required String newValue}) {
     return sharedPreferences.setString(key, newValue);
+  }
+
+  static Future<bool> updateNum({required String key, required double newValue}) {
+    return sharedPreferences.setDouble(key, newValue);
   }
 
   static Future<void> addMapToList(Map newData) async {

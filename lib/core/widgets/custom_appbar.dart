@@ -44,18 +44,18 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            InkWell(
-              onTap: () {
-                AppCubit.get(context).search.clear();
-                print(AppCubit.get(context).search);
-                searchDialog(context);
-              },
-              child: Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 24.h,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     AppCubit.get(context).search.clear();
+            //     print(AppCubit.get(context).search);
+            //     searchDialog(context);
+            //   },
+            //   child: Icon(
+            //     Icons.search,
+            //     color: Colors.white,
+            //     size: 24.h,
+            //   ),
+            // ),
           ],
         );
       },

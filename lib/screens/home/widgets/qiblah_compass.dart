@@ -40,12 +40,16 @@ class _QiblahCompassState extends State<QiblahCompass> {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
+          Container(
             height: double.infinity,
             width: double.infinity,
-            child: Image.asset(
-              "assets/img/home.png",
-              fit: BoxFit.cover,
+            decoration: const BoxDecoration(
+              color: AppColors.primary,
+              image: DecorationImage(
+                opacity: 0.5,
+                fit: BoxFit.fill,
+                image: AssetImage("assets/img/home.png"),
+              ),
             ),
           ),
           Padding(
@@ -66,7 +70,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                     builder: (context, AsyncSnapshot<LocationStatus> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return SizedBox(
-                          height: 350.h,
+                          height: 430.h,
                           child: const Center(
                             child: CircularProgressIndicator(
                                 color: AppColors.secondray),
@@ -84,7 +88,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return SizedBox(
-                                    height: 350.h,
+                                    height: 430.h,
                                     child: const Center(
                                       child: CircularProgressIndicator(
                                         color: AppColors.secondray,

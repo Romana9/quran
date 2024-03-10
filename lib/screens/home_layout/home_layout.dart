@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,7 +32,7 @@ class HomeLayout extends StatelessWidget {
     List<PersistentBottomNavBarItem> navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset("assets/svg/home.svg"),
+          icon: const Icon(CupertinoIcons.home),
           iconSize: 24.h,
           title: (" الرئيسية"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
@@ -47,7 +48,7 @@ class HomeLayout extends StatelessWidget {
           inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset("assets/svg/lastRead.svg"),
+          icon: SvgPicture.asset("assets/svg/home.svg"),
           iconSize: 24.h,
           title: (' آخر قراءة'),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
@@ -55,7 +56,7 @@ class HomeLayout extends StatelessWidget {
           inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset("assets/svg/mosque.svg"),
+          icon: const Icon(CupertinoIcons.compass),
           iconSize: 24.h,
           title: (" القبلة"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),

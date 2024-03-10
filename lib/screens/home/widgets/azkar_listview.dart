@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../core/app_cubit/app_cubit.dart';
+import '../../../core/colors.dart';
 import '../../../core/widgets/custom_appbar.dart';
 import '../../surah/surah.dart';
 
@@ -18,12 +19,16 @@ class AzkarListView extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-              SizedBox(
+              Container(
                 height: double.infinity,
                 width: double.infinity,
-                child: Image.asset(
-                  "assets/img/home.png",
-                  fit: BoxFit.cover,
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  image: DecorationImage(
+                    opacity: 0.5,
+                    fit: BoxFit.fill,
+                    image: AssetImage("assets/img/home.png"),
+                  ),
                 ),
               ),
               Padding(

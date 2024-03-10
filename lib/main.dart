@@ -24,20 +24,41 @@ void main() async {
 
   await CacheNetwork.cacheInitilzation();
   currentList = await CacheNetwork.loadData();
-  position = await LocationHelper.determinePosition();
-  print("currentList is $currentList");
+  if (CacheNetwork.getNumCacheData(key: "lat") != 0 ||
+      CacheNetwork.getNumCacheData(key: "lng") != 0) {
+    lat = CacheNetwork.getNumCacheData(key: "lat");
+    lng = CacheNetwork.getNumCacheData(key: "lng");
+    print("lat is $lat & lng is $lng");
 
-  lat = position!.latitude;
-  lng = position!.longitude;
+    final placemarks = await placemarkFromCoordinates(
+        CacheNetwork.getNumCacheData(key: "lat"),
+        CacheNetwork.getNumCacheData(key: "lng"));
+    city = placemarks[0].locality;
+    print("city is $city");
 
-  final placemarks = await placemarkFromCoordinates(lat!, lng!);
-  city = placemarks[0].locality;
-  print("city is $city");
+    final myCoordinates = Coordinates(lat!, lng!);
+    final params = CalculationMethod.egyptian.getParameters();
+    params.madhab = Madhab.shafi;
+    prayerTimes = PrayerTimes.today(myCoordinates, params);
+  } else {
+    position = await LocationHelper.determinePosition();
 
-  final myCoordinates = Coordinates(lat!, lng!);
-  final params = CalculationMethod.egyptian.getParameters();
-  params.madhab = Madhab.shafi;
-  prayerTimes = PrayerTimes.today(myCoordinates, params);
+    lat = position!.latitude;
+    lng = position!.longitude;
+    CacheNetwork.insertNumToCache(key: "lat", value: lat!);
+    CacheNetwork.insertNumToCache(key: "lng", value: lng!);
+    print("lat is $lat & lng is $lng");
+
+    final placemarks = await placemarkFromCoordinates(lat!, lng!);
+    city = placemarks[0].locality;
+    print("city is $city");
+
+    final myCoordinates = Coordinates(lat!, lng!);
+    final params = CalculationMethod.egyptian.getParameters();
+    params.madhab = Madhab.shafi;
+    prayerTimes = PrayerTimes.today(myCoordinates, params);
+  }
+
   print(
       "---Today's Prayer Times in Your Local Timezone(${prayerTimes.fajr.timeZoneName})---");
   print(DateFormat.jm().format(prayerTimes.fajr));

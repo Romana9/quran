@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../Cache/local_network.dart';
 import '../constants.dart';
+import '../location_helper.dart';
 // import 'package:http/http.dart' as http;
 part 'app_state.dart';
 
@@ -104,7 +105,7 @@ class AppCubit extends Cubit<AppState> {
       "pageNum": 1,
     },
     {
-      "page": 27,
+      "page": 28,
       "name": "دعاء ختم القرآن",
       "pageNum": 2,
     },
@@ -798,6 +799,12 @@ class AppCubit extends Cubit<AppState> {
 
   updateLocation() async {
     emit(UpdateLocationLoading());
+    position = await LocationHelper.determinePosition();
+    lat = position!.latitude;
+    lng = position!.longitude;
+    CacheNetwork.updateNum(key: "lat", newValue: lat!);
+    CacheNetwork.updateNum(key: "lng", newValue: lng!);
+
     final placemarks = await placemarkFromCoordinates(lat!, lng!);
     city = placemarks[0].locality;
     print("city is $city");
