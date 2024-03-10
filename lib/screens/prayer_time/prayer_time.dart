@@ -13,7 +13,7 @@ class PrayerTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is UpdateLocatingSuccess) {
           Fluttertoast.showToast(
               msg: "تم تحديث الموقع بنجاح",
@@ -23,7 +23,18 @@ class PrayerTime extends StatelessWidget {
               backgroundColor: Colors.green,
               textColor: Colors.white,
               fontSize: 16.0.sp);
-        }
+        } 
+        // else if (state is UpdateLocatingFailure) {
+        //   Fluttertoast.showToast(
+        //       msg: "قم بتفعيل الموقع من فضلك",
+        //       toastLength: Toast.LENGTH_SHORT,
+        //       gravity: ToastGravity.BOTTOM_LEFT,
+        //       timeInSecForIosWeb: 1,
+        //       backgroundColor: Colors.red,
+        //       textColor: Colors.white,
+        //       fontSize: 16.0.sp);
+        //   await Geolocator.openLocationSettings();
+        // }
       },
       builder: (context, state) {
         return Scaffold(

@@ -42,12 +42,16 @@ void main() async {
     prayerTimes = PrayerTimes.today(myCoordinates, params);
   } else {
     position = await LocationHelper.determinePosition();
-
-    lat = position!.latitude;
-    lng = position!.longitude;
-    CacheNetwork.insertNumToCache(key: "lat", value: lat!);
-    CacheNetwork.insertNumToCache(key: "lng", value: lng!);
-    print("lat is $lat & lng is $lng");
+    if (position == null) {
+      lat = 30.033333;
+      lng = 31.233334;
+    } else {
+      lat = position!.latitude;
+      lng = position!.longitude;
+      CacheNetwork.insertNumToCache(key: "lat", value: lat!);
+      CacheNetwork.insertNumToCache(key: "lng", value: lng!);
+      print("lat is $lat & lng is $lng");
+    }
 
     final placemarks = await placemarkFromCoordinates(lat!, lng!);
     city = placemarks[0].locality;

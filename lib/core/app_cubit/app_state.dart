@@ -12,3 +12,5 @@ final class UpdateCache extends AppState {}
 final class UpdateLocationLoading extends AppState {}
 
 final class UpdateLocatingSuccess extends AppState {}
+
+final class UpdateLocatingFailure extends AppState {}

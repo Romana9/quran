@@ -181,29 +181,35 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: Colors.white,
-                                size: 23.r,
-                              ),
-                              SizedBox(
-                                width: 120.w,
-                                child: Text(
-                                  city ?? "",
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 21.sp,
-                                    color: Colors.white,
-                                  ),
+                          position == null
+                              ? const SizedBox()
+                              : Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.location_on,
+                                          color: Colors.white,
+                                          size: 23.r,
+                                        ),
+                                        SizedBox(
+                                          width: 120.w,
+                                          child: Text(
+                                            city ?? "",
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 21.sp,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 20.h),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20.h),
                           Text(
                             _jHijriDate,
                             style: TextStyle(
