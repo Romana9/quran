@@ -25,6 +25,12 @@ class CustomAppBar extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
+                // if (Platform.isIOS) {
+                //   Share.share(
+                //       "https://apps.apple.com/eg/app/القرآن-الكريـم/id1603915644");
+                // } else {
+                //   Share.share("http://onelink.to/k5eqch");
+                // }
                 Share.share("http://onelink.to/k5eqch");
               },
               child: Icon(
