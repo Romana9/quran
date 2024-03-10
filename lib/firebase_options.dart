@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBwmefaRTm17iLAd3d6SKiiVhzWjZss_Ao',
-    appId: '1:352433770948:android:548cd3462c63e407499491',
+    appId: '1:352433770948:android:90800f198b028010499491',
     messagingSenderId: '352433770948',
     projectId: 'quran-978e9',
     storageBucket: 'quran-978e9.appspot.com',
@@ -63,21 +63,22 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAyoqnPnXrjW5NfWCfI_HB8I6r230uwZHI',
-    appId: '1:352433770948:ios:f8f8677f3b064281499491',
+    appId: '1:352433770948:ios:20992db7d94b0135499491',
     messagingSenderId: '352433770948',
     projectId: 'quran-978e9',
     storageBucket: 'quran-978e9.appspot.com',
     androidClientId: '352433770948-dlos2la0labf65v9ofn78j6h43ut993g.apps.googleusercontent.com',
-    iosBundleId: 'com.efadh.quran',
+    iosClientId: '352433770948-ldl0ikn49gdbba2nf8igv1fuofr9101a.apps.googleusercontent.com',
+    iosBundleId: 'com.efadh.quraan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAyoqnPnXrjW5NfWCfI_HB8I6r230uwZHI',
-    appId: '1:352433770948:ios:873d459c0423baec499491',
+    appId: '1:352433770948:ios:0281d78ce64dd7ba499491',
     messagingSenderId: '352433770948',
     projectId: 'quran-978e9',
     storageBucket: 'quran-978e9.appspot.com',
     androidClientId: '352433770948-dlos2la0labf65v9ofn78j6h43ut993g.apps.googleusercontent.com',
-    iosBundleId: 'com.efadh.quran.RunnerTests',
+    iosBundleId: 'com.efadh.quraan.RunnerTests',
   );
 }
