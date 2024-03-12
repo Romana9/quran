@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:jhijri/jHijri.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -96,16 +97,38 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is UpdateLocatingSuccess) {
+          Fluttertoast.showToast(
+              msg: "تم تحديث الموقع بنجاح",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_LEFT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0.sp);
+        } else if (state is UpdateLocatingFailure) {
+          Fluttertoast.showToast(
+              msg: "قم بتفعيل الموقع من فضلك",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_LEFT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0.sp);
+        }
+      },
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            PersistentNavBarNavigator.pushNewScreen(
-              context,
-              screen: const PrayerTime(),
-              withNavBar: true,
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
+            lat == 0.1 && lng == 0.2
+                ? null
+                : PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const PrayerTime(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -131,67 +154,111 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                     ),
                   ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 165.w,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: lat == 0.1 && lng == 0.2
+                    ? Column(
                         children: [
                           Text(
-                            nearestPrayer,
+                            "قم بتفعيل الموقع لمعرفة مواعيد الصلاة",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 25.sp,
+                              fontSize: 24.sp,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
                               fontFamily: "TheSansBold",
                             ),
                           ),
-                          nearestPrayerTime != null
-                              ? Text(
-                                  nearestTime!,
-                                  style: TextStyle(
-                                    fontSize: 30.sp,
-                                    color: Colors.white,
+                          SizedBox(height: 12.h),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              AppCubit.get(context).updateLocation();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.secondray,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                              minimumSize: Size(100.w, 50.h),
+                            ),
+                            label: state is UpdateLocationLoading
+                                ? SizedBox(
+                                    height: 30.h,
+                                    child: const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : Text(
+                                    "تحديث الموقع",
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                )
-                              : const CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                          nearestPrayerTime == null || _timeUntil.inHours < 0
-                              ? Container()
-                              : Text(
-                                  'متبقى : ${_timeUntil.inHours}:${_timeUntil.inMinutes.remainder(60)}:${_timeUntil.inSeconds.remainder(60)}',
-                                  style: TextStyle(
-                                    fontSize: 23.sp,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            icon: Icon(
+                              Icons.replay_circle_filled_outlined,
+                              color: Colors.white,
+                              size: 25.h,
+                            ),
+                          ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 7.w, vertical: 10.h),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      )
+                    : Column(
                         children: [
-                          position == null
-                              ? const SizedBox()
-                              : Column(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 165.w,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      nearestPrayer,
+                                      style: TextStyle(
+                                        fontSize: 25.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "TheSansBold",
+                                      ),
+                                    ),
+                                    nearestPrayerTime != null
+                                        ? Text(
+                                            nearestTime!,
+                                            style: TextStyle(
+                                              fontSize: 30.sp,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                    nearestPrayerTime == null ||
+                                            _timeUntil.inHours < 0
+                                        ? Container()
+                                        : Text(
+                                            'متبقى : ${_timeUntil.inHours}:${_timeUntil.inMinutes.remainder(60)}:${_timeUntil.inSeconds.remainder(60)}',
+                                            style: TextStyle(
+                                              fontSize: 23.sp,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 7.w, vertical: 10.h),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(
-                                          Icons.location_on,
-                                          color: Colors.white,
-                                          size: 23.r,
-                                        ),
                                         SizedBox(
                                           width: 120.w,
                                           child: Text(
@@ -205,23 +272,30 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                                             ),
                                           ),
                                         ),
+                                        Icon(
+                                          Icons.location_on,
+                                          color: Colors.white,
+                                          size: 23.r,
+                                        ),
                                       ],
                                     ),
-                                    SizedBox(height: 20.h),
+                                    SizedBox(height: 15.h),
+                                    Text(
+                                      _jHijriDate,
+                                      style: TextStyle(
+                                        fontSize: 21.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                          Text(
-                            _jHijriDate,
-                            style: TextStyle(
-                              fontSize: 21.sp,
-                              color: Colors.white,
-                            ),
+                              )
+                            ],
                           ),
+                          
+                          
                         ],
                       ),
-                    )
-                  ],
-                ),
               ),
             ],
           ),

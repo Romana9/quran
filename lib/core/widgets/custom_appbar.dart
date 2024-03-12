@@ -31,7 +31,11 @@ class CustomAppBar extends StatelessWidget {
                 // } else {
                 //   Share.share("http://onelink.to/k5eqch");
                 // }
-                Share.share("http://onelink.to/k5eqch");
+                Share.share(
+                  subject:
+                      "تطبيق قرآني يشمل القرأن الكريم و الاذان و ادعية المسلم اليومية بدون اعلانات او اشتراك مجاني لوجة الله/nبرجاء مشاركة التطبيق مع الأخرين لنتمكن من نفع اكبر عدد ممكن",
+                  "http://onelink.to/k5eqch",
+                );
               },
               child: Icon(
                 Icons.share,

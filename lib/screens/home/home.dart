@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quran/core/app_cubit/app_cubit.dart';
+import 'package:quran/screens/surah/surah.dart';
 import '../../core/colors.dart';
 import '../../core/widgets/custom_appbar.dart';
+import '../../main.dart';
 import '../search/search.dart';
 import 'widgets/prayer_time_container.dart';
 import 'widgets/surah_listview.dart';
@@ -131,6 +134,62 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                       SizedBox(height: 24.h),
+                      Visibility(
+                        visible: lastRead.isEmpty ? false : true,
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: Surah(
+                                    page: lastRead[0]["currentPage"] ??
+                                        lastRead[0]["page"],
+                                    name: lastRead[0]["name"],
+                                    surah: lastRead[0],
+                                    pdfName: 'quran',
+                                    index: 0,
+                                  ),
+                                  withNavBar: false,
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.w, vertical: 10.h),
+                                margin: EdgeInsets.symmetric(horizontal: 24.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      ' آخر قراءة',
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        color: Colors.white,
+                                        // fontWeight: FontWeight.bold,
+                                        fontFamily: "TheSansBold",
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      size: 21.h,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 24.h),
+                          ],
+                        ),
+                      ),
+
                       const SurahListView(),
                       // AppCubit.get(context).buttonIndex == 0
                       //     ?

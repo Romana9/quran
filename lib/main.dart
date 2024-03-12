@@ -15,15 +15,17 @@ import 'core/location_helper.dart';
 import 'screens/splash/splash.dart';
 
 List currentList = [];
+List lastRead = [];
 late PrayerTimes prayerTimes;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Alarm.init();
-
   await CacheNetwork.cacheInitilzation();
+  await Alarm.init();
   currentList = await CacheNetwork.loadData();
+  lastRead = await CacheNetwork.loadDataLastRead();
+
   if (CacheNetwork.getNumCacheData(key: "lat") != 0 ||
       CacheNetwork.getNumCacheData(key: "lng") != 0) {
     lat = CacheNetwork.getNumCacheData(key: "lat");
@@ -43,8 +45,9 @@ void main() async {
   } else {
     position = await LocationHelper.determinePosition();
     if (position == null) {
-      lat = 30.033333;
-      lng = 31.233334;
+      lat = 0.1;
+      lng = 0.2;
+      print("lat is $lat & lng is $lng");
     } else {
       lat = position!.latitude;
       lng = position!.longitude;
@@ -71,9 +74,6 @@ void main() async {
   print(DateFormat.jm().format(prayerTimes.asr));
   print(DateFormat.jm().format(prayerTimes.maghrib));
   print(DateFormat.jm().format(prayerTimes.isha));
-
-  print(prayerTimes.fajr.hour);
-  print(DateTime.now());
 
   setAlarm();
 

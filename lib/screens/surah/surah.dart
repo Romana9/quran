@@ -92,6 +92,7 @@ class _SurahState extends State<Surah> {
                                             onPressed: () async {
                                               widget.surah["currentPage"] =
                                                   pageCount - currentPage - 1;
+                                              widget.surah["lastRead"] = false;
                                               AppCubit.get(context).addToCache(
                                                   "lastRead", "true");
                                               await CacheNetwork.addMapToList(
@@ -144,12 +145,20 @@ class _SurahState extends State<Surah> {
                     ),
                     SizedBox(height: 10.h),
                     SizedBox(
-                      height: 650.h,
+                      height: widget.pdfName == "quran" ? 650.h : 675.h,
                       child: PDF(
                         defaultPage: widget.page == 0 ? 1 : widget.page,
                         swipeHorizontal: true,
                         preventLinkNavigation: true,
                         fitPolicy: FitPolicy.BOTH,
+                        onViewCreated:
+                            (PDFViewController pdfViewController) async {
+                          _pdfViewController.complete(pdfViewController);
+                          final int currentPage =
+                              await pdfViewController.getCurrentPage() ?? 0;
+                          _pageCountController
+                              .add('${currentPage + 1} - $pageCount');
+                        },
                         onPageChanged: (int? current, int? total) async {
                           pageCount = total!;
                           if (!reversedDefaultPage) {
@@ -162,14 +171,21 @@ class _SurahState extends State<Surah> {
                           _pageCountController.add('${current! + 1} - $total');
                           currentPage = current;
                           print('page changed $currentPage');
-                        },
-                        onViewCreated:
-                            (PDFViewController pdfViewController) async {
-                          _pdfViewController.complete(pdfViewController);
-                          final int currentPage =
-                              await pdfViewController.getCurrentPage() ?? 0;
-                          _pageCountController
-                              .add('${currentPage + 1} - $pageCount');
+
+                          // Update last read
+                          if (widget.pdfName == "quran") {
+                            if (widget.surah["currentPage"] == null ||
+                                widget.surah["lastRead"] == null) {
+                              widget.surah["currentPage"] =
+                                  pageCount - currentPage - 1;
+                              await CacheNetwork.addMapToListLastRead(
+                                  widget.surah);
+                              lastRead = await CacheNetwork.loadDataLastRead();
+                              AppCubit.get(context)
+                                  .addToCache("lastRead", "true");
+                              print('lastRead List: $lastRead');
+                            }
+                          }
                         },
                       ).fromAsset(
                         "assets/pdf/${widget.pdfName}.pdf",

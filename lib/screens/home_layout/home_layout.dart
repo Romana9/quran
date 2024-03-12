@@ -34,7 +34,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
           iconSize: 24.h,
-          title: (" الرئيسية"),
+          title: ("الرئيسية"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
@@ -42,7 +42,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: SvgPicture.asset("assets/svg/doaa.svg"),
           iconSize: 24.h,
-          title: (" الأذكار"),
+          title: ("الأذكار"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
@@ -50,7 +50,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: SvgPicture.asset("assets/svg/home.svg"),
           iconSize: 24.h,
-          title: (' آخر قراءة'),
+          title: ('آخر قراءة'),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
@@ -58,7 +58,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.compass),
           iconSize: 24.h,
-          title: (" القبلة"),
+          title: ("القبلة"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
@@ -66,7 +66,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: SvgPicture.asset("assets/svg/tasbih.svg"),
           iconSize: 24.h,
-          title: (" التسبيح"),
+          title: ("التسبيح"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,

@@ -34,7 +34,8 @@ class CacheNetwork {
     return sharedPreferences.setString(key, newValue);
   }
 
-  static Future<bool> updateNum({required String key, required double newValue}) {
+  static Future<bool> updateNum(
+      {required String key, required double newValue}) {
     return sharedPreferences.setDouble(key, newValue);
   }
 
@@ -92,5 +93,40 @@ class CacheNetwork {
 
     // Save the updated list to SharedPreferences
     prefs.setStringList('dataList', updatedJsonDataList);
+  }
+
+  static Future<void> addMapToListLastRead(Map newData) async {
+    // Retrieve existing data from SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    final jsonDataList = prefs.getStringList('data');
+
+    List data = [];
+
+    if (jsonDataList != null) {
+      // Convert JSON strings to Map objects
+      data = jsonDataList.map((jsonData) => jsonDecode(jsonData)).toList();
+    }
+
+    // Add the new map to the list
+    data.clear();
+    data.add(newData);
+
+    // Convert the list of maps back to JSON strings
+    final updatedJsonDataList =
+        data.map((data) => jsonEncode(data)).toList();
+
+    // Save the updated list to SharedPreferences
+    prefs.setStringList('data', updatedJsonDataList);
+  }
+
+  static Future<List> loadDataLastRead() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonDataList = prefs.getStringList('data');
+
+    if (jsonDataList == null) {
+      return [];
+    }
+
+    return jsonDataList.map((jsonData) => jsonDecode(jsonData)).toList();
   }
 }

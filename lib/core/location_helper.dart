@@ -8,7 +8,10 @@ class LocationHelper {
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      await Geolocator.requestPermission();
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return null;
+      }
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.

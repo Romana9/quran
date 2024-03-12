@@ -1,9 +1,12 @@
+import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
 
+import '../../main.dart';
 import '../Cache/local_network.dart';
 import '../constants.dart';
 import '../location_helper.dart';
@@ -798,16 +801,31 @@ class AppCubit extends Cubit<AppState> {
   ];
 
   updateLocation() async {
-    emit(UpdateLocationLoading());
     position = await LocationHelper.determinePosition();
-    lat = position!.latitude;
-    lng = position!.longitude;
-    CacheNetwork.updateNum(key: "lat", newValue: lat!);
-    CacheNetwork.updateNum(key: "lng", newValue: lng!);
+    if (position == null) {
+      emit(UpdateLocatingFailure());
+      Future.delayed(const Duration(milliseconds: 700), () async {
+        await Geolocator.openLocationSettings();
+      });
+    } else {
+      emit(UpdateLocationLoading());
+      lat = position!.latitude;
+      lng = position!.longitude;
+      CacheNetwork.insertNumToCache(key: "lat", value: lat!);
+      CacheNetwork.insertNumToCache(key: "lng", value: lng!);
+      print("lat is $lat & lng is $lng");
+      print(CacheNetwork.getNumCacheData(key: "lat"));
+      print(CacheNetwork.getNumCacheData(key: "lng"));
 
-    final placemarks = await placemarkFromCoordinates(lat!, lng!);
-    city = placemarks[0].locality;
-    print("city is $city");
-    emit(UpdateLocatingSuccess());
+      final placemarks = await placemarkFromCoordinates(lat!, lng!);
+      city = placemarks[0].locality;
+      print("city is $city");
+
+      final myCoordinates = Coordinates(lat!, lng!);
+      final params = CalculationMethod.egyptian.getParameters();
+      params.madhab = Madhab.shafi;
+      prayerTimes = PrayerTimes.today(myCoordinates, params);
+      emit(UpdateLocatingSuccess());
+    }
   }
 }
