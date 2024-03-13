@@ -116,6 +116,15 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 16.0.sp);
+        } else if (state is UpdateLocatingConnectionFailure) {
+          Fluttertoast.showToast(
+              msg: "تحقق من الاتصال بالانترنت",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_LEFT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0.sp);
         }
       },
       builder: (context, state) {
@@ -292,8 +301,6 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                               )
                             ],
                           ),
-                          
-                          
                         ],
                       ),
               ),

@@ -8,9 +8,18 @@ class CacheNetwork {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
+  static Future<bool> checkContain({required String key}) async {
+    return sharedPreferences.containsKey(key);
+  }
+
   static Future<bool> insertToCache(
       {required String key, required String value}) async {
     return await sharedPreferences.setString(key, value);
+  }
+
+  static Future<bool> insertBoolToCache(
+      {required String key, required bool value}) async {
+    return await sharedPreferences.setBool(key, value);
   }
 
   static Future<bool> insertNumToCache(
@@ -20,6 +29,10 @@ class CacheNetwork {
 
   static String getCacheData({required String key}) {
     return sharedPreferences.getString(key) ?? "";
+  }
+
+  static bool getBoolCacheData({required String key}) {
+    return sharedPreferences.getBool(key) ?? true;
   }
 
   static double getNumCacheData({required String key}) {
@@ -32,6 +45,11 @@ class CacheNetwork {
 
   static Future<bool> update({required String key, required String newValue}) {
     return sharedPreferences.setString(key, newValue);
+  }
+
+  static Future<bool> updateBool(
+      {required String key, required bool newValue}) {
+    return sharedPreferences.setBool(key, newValue);
   }
 
   static Future<bool> updateNum(
@@ -112,8 +130,7 @@ class CacheNetwork {
     data.add(newData);
 
     // Convert the list of maps back to JSON strings
-    final updatedJsonDataList =
-        data.map((data) => jsonEncode(data)).toList();
+    final updatedJsonDataList = data.map((data) => jsonEncode(data)).toList();
 
     // Save the updated list to SharedPreferences
     prefs.setStringList('data', updatedJsonDataList);

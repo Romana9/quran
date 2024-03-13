@@ -32,6 +32,15 @@ class PrayerTime extends StatelessWidget {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 16.0.sp);
+        } else if (state is UpdateLocatingConnectionFailure) {
+          Fluttertoast.showToast(
+              msg: "تحقق من الاتصال بالانترنت",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_LEFT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0.sp);
         }
       },
       builder: (context, state) {
@@ -118,7 +127,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 25.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -137,6 +146,36 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(
+                                width: 80.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppCubit.get(context).fajrNotification ==
+                                              false
+                                          ? "تشغيل الاذان"
+                                          : "ايقاف الاذان",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.85.h,
+                                      child: Switch(
+                                        activeColor: AppColors.primary,
+                                        value: AppCubit.get(context)
+                                            .fajrNotification,
+                                        onChanged: (value) {
+                                          AppCubit.get(context)
+                                              .changefajrNotification();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 "الفجر",
                                 style: TextStyle(
@@ -159,7 +198,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -178,6 +217,7 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(width: 80.w),
                               Text(
                                 "الشروق",
                                 style: TextStyle(
@@ -200,7 +240,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -219,6 +259,36 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(
+                                width: 80.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppCubit.get(context).duhrNotification ==
+                                              false
+                                          ? "تشغيل الاذان"
+                                          : "ايقاف الاذان",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.85.h,
+                                      child: Switch(
+                                        activeColor: AppColors.primary,
+                                        value: AppCubit.get(context)
+                                            .duhrNotification,
+                                        onChanged: (value) {
+                                          AppCubit.get(context)
+                                              .changeduhrNotification();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 "الظهر",
                                 style: TextStyle(
@@ -241,7 +311,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -260,6 +330,36 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(
+                                width: 80.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppCubit.get(context).asrNotification ==
+                                              false
+                                          ? "تشغيل الاذان"
+                                          : "ايقاف الاذان",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.85.h,
+                                      child: Switch(
+                                        activeColor: AppColors.primary,
+                                        value: AppCubit.get(context)
+                                            .asrNotification,
+                                        onChanged: (value) {
+                                          AppCubit.get(context)
+                                              .changeasrNotification();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 "العصر",
                                 style: TextStyle(
@@ -282,7 +382,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -301,6 +401,37 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(
+                                width: 80.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppCubit.get(context)
+                                                  .maghribNotification ==
+                                              false
+                                          ? "تشغيل الاذان"
+                                          : "ايقاف الاذان",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.85.h,
+                                      child: Switch(
+                                        activeColor: AppColors.primary,
+                                        value: AppCubit.get(context)
+                                            .maghribNotification,
+                                        onChanged: (value) {
+                                          AppCubit.get(context)
+                                              .changemaghribNotification();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 "المغرب",
                                 style: TextStyle(
@@ -323,7 +454,7 @@ class PrayerTime extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Container(
-                        height: 70.h,
+                        height: 72.h,
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         decoration: BoxDecoration(
@@ -342,6 +473,36 @@ class PrayerTime extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              SizedBox(
+                                width: 80.w,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppCubit.get(context).ishaNotification ==
+                                              false
+                                          ? "تشغيل الاذان"
+                                          : "ايقاف الاذان",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.85.h,
+                                      child: Switch(
+                                        activeColor: AppColors.primary,
+                                        value: AppCubit.get(context)
+                                            .ishaNotification,
+                                        onChanged: (value) {
+                                          AppCubit.get(context)
+                                              .changeishaNotification();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 "العشاء",
                                 style: TextStyle(

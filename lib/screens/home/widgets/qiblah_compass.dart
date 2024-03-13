@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math' show pi;
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
@@ -128,21 +129,24 @@ class _QiblahCompassState extends State<QiblahCompass> {
 
                           case LocationPermission.denied:
                             return LocationErrorWidget(
-                              error: "Location service permission denied",
-                              callback: _checkLocationStatus,
+                              error:
+                                  "من فضلك اسمح للتطبيق معرفة موقعك حتى تتمكن من استخدام القبلة",
+                              callback: _checkLocationStatusIos,
                             );
                           case LocationPermission.deniedForever:
                             return LocationErrorWidget(
-                              error: "Location service Denied Forever !",
-                              callback: _checkLocationStatus,
+                              error:
+                                  "من فضلك اسمح للتطبيق معرفة موقعك حتى تتمكن من استخدام القبلة",
+                              callback: _checkLocationStatusIos,
                             );
                           default:
                             return const SizedBox();
                         }
                       } else {
                         return LocationErrorWidget(
-                          error: "Please enable Location service",
-                          callback: _checkLocationStatus,
+                          error:
+                              "من فضلك اسمح للتطبيق معرفة موقعك حتى تتمكن من استخدام القبلة",
+                          callback: _checkLocationStatusIos,
                         );
                       }
                     },
@@ -165,6 +169,24 @@ class _QiblahCompassState extends State<QiblahCompass> {
       final s = await FlutterQiblah.checkLocationStatus();
       _locationStreamController.sink.add(s);
     } else {
+      _locationStreamController.sink.add(locationStatus);
+    }
+  }
+
+  Future<void> _checkLocationStatusIos() async {
+    final locationStatus = await FlutterQiblah.checkLocationStatus();
+    if (locationStatus.enabled &&
+        locationStatus.status == LocationPermission.denied) {
+      await FlutterQiblah.requestPermissions();
+      final s = await FlutterQiblah.checkLocationStatus();
+      _locationStreamController.sink.add(s);
+    } else {
+      if ((Platform.isIOS &&
+              locationStatus.status == LocationPermission.denied) ||
+          (Platform.isIOS &&
+              locationStatus.status == LocationPermission.deniedForever)) {
+        await Geolocator.openLocationSettings();
+      }
       _locationStreamController.sink.add(locationStatus);
     }
   }

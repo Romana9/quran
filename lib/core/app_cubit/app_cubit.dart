@@ -1,9 +1,11 @@
 import 'package:adhan/adhan.dart';
+import 'package:alarm/alarm.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:meta/meta.dart';
 
 import '../../main.dart';
@@ -800,6 +802,140 @@ class AppCubit extends Cubit<AppState> {
     }
   ];
 
+  bool fajrNotification = CacheNetwork.getBoolCacheData(key: "fajr");
+  bool duhrNotification = CacheNetwork.getBoolCacheData(key: "duhr");
+  bool asrNotification = CacheNetwork.getBoolCacheData(key: "asr");
+  bool maghribNotification = CacheNetwork.getBoolCacheData(key: "maghrib");
+  bool ishaNotification = CacheNetwork.getBoolCacheData(key: "isha");
+
+  changefajrNotification() {
+    fajrNotification = !fajrNotification;
+    CacheNetwork.updateBool(key: "fajr", newValue: fajrNotification);
+
+    Alarm.stop(1);
+    if (prayerTimes.fajr.isAfter(DateTime.now())) {
+      Alarm.set(
+        alarmSettings: AlarmSettings(
+          id: 1,
+          dateTime: prayerTimes.fajr,
+          assetAudioPath: 'assets/mp3/adhan.mp3',
+          loopAudio: false,
+          vibrate: false,
+          volume: CacheNetwork.getBoolCacheData(key: "fajr") == true ? 1 : 0,
+          fadeDuration: 3.0,
+          notificationTitle: 'الأذان',
+          notificationBody: 'حان الأن موعد أذان الفجر',
+        ),
+      );
+    }
+
+    emit(ChangeNotificationState());
+  }
+
+  changeduhrNotification() {
+    duhrNotification = !duhrNotification;
+    CacheNetwork.updateBool(key: "duhr", newValue: duhrNotification);
+
+    Alarm.stop(2);
+    if (prayerTimes.dhuhr.isAfter(DateTime.now())) {
+      Alarm.set(
+        alarmSettings: AlarmSettings(
+          id: 2,
+          dateTime: prayerTimes.dhuhr,
+          assetAudioPath: 'assets/mp3/adhan.mp3',
+          loopAudio: false,
+          vibrate: false,
+          volume: CacheNetwork.getBoolCacheData(key: "duhr") == true ? 1 : 0,
+          fadeDuration: 3.0,
+          notificationTitle: 'الأذان',
+          notificationBody: 'حان الأن موعد أذان الظهر',
+          enableNotificationOnKill: false,
+          androidFullScreenIntent: false,
+        ),
+      );
+    }
+
+    emit(ChangeNotificationState());
+  }
+
+  changeasrNotification() {
+    asrNotification = !asrNotification;
+    CacheNetwork.updateBool(key: "asr", newValue: asrNotification);
+
+    Alarm.stop(3);
+    if (prayerTimes.asr.isAfter(DateTime.now())) {
+      Alarm.set(
+        alarmSettings: AlarmSettings(
+          id: 3,
+          dateTime: prayerTimes.asr,
+          assetAudioPath: 'assets/mp3/adhan.mp3',
+          loopAudio: false,
+          vibrate: false,
+          volume: CacheNetwork.getBoolCacheData(key: "asr") == true ? 1 : 0,
+          fadeDuration: 3.0,
+          notificationTitle: 'الأذان',
+          notificationBody: 'حان الأن موعد أذان العصر',
+          enableNotificationOnKill: false,
+          androidFullScreenIntent: false,
+        ),
+      );
+    }
+
+    emit(ChangeNotificationState());
+  }
+
+  changemaghribNotification() {
+    maghribNotification = !maghribNotification;
+    CacheNetwork.updateBool(key: "maghrib", newValue: maghribNotification);
+
+    Alarm.stop(4);
+    if (prayerTimes.maghrib.isAfter(DateTime.now())) {
+      Alarm.set(
+        alarmSettings: AlarmSettings(
+          id: 4,
+          dateTime: prayerTimes.maghrib,
+          assetAudioPath: 'assets/mp3/adhan.mp3',
+          loopAudio: false,
+          vibrate: false,
+          volume: CacheNetwork.getBoolCacheData(key: "maghrib") == true ? 1 : 0,
+          fadeDuration: 3.0,
+          notificationTitle: 'الأذان',
+          notificationBody: 'حان الأن موعد أذان المغرب',
+          enableNotificationOnKill: false,
+          androidFullScreenIntent: false,
+        ),
+      );
+    }
+
+    emit(ChangeNotificationState());
+  }
+
+  changeishaNotification() {
+    ishaNotification = !ishaNotification;
+    CacheNetwork.updateBool(key: "isha", newValue: ishaNotification);
+
+    Alarm.stop(5);
+    if (prayerTimes.isha.isAfter(DateTime.now())) {
+      Alarm.set(
+        alarmSettings: AlarmSettings(
+          id: 5,
+          dateTime: prayerTimes.isha,
+          assetAudioPath: 'assets/mp3/adhan.mp3',
+          loopAudio: false,
+          vibrate: false,
+          volume: CacheNetwork.getBoolCacheData(key: "isha") == true ? 1 : 0,
+          fadeDuration: 3.0,
+          notificationTitle: 'الأذان',
+          notificationBody: 'حان الأن موعد أذان العشاء',
+          enableNotificationOnKill: false,
+          androidFullScreenIntent: false,
+        ),
+      );
+    }
+
+    emit(ChangeNotificationState());
+  }
+
   updateLocation() async {
     position = await LocationHelper.determinePosition();
     if (position == null) {
@@ -809,23 +945,37 @@ class AppCubit extends Cubit<AppState> {
       });
     } else {
       emit(UpdateLocationLoading());
-      lat = position!.latitude;
-      lng = position!.longitude;
-      CacheNetwork.insertNumToCache(key: "lat", value: lat!);
-      CacheNetwork.insertNumToCache(key: "lng", value: lng!);
-      print("lat is $lat & lng is $lng");
-      print(CacheNetwork.getNumCacheData(key: "lat"));
-      print(CacheNetwork.getNumCacheData(key: "lng"));
+      bool result = await InternetConnectionChecker().hasConnection;
+      if (result) {
+        lat = position!.latitude;
+        lng = position!.longitude;
+        if (CacheNetwork.getNumCacheData(key: "lat") == 0) {
+          CacheNetwork.insertNumToCache(key: "lat", value: lat!);
+          CacheNetwork.insertNumToCache(key: "lng", value: lng!);
+        } else {
+          CacheNetwork.updateNum(key: "lat", newValue: lat!);
+          CacheNetwork.updateNum(key: "lng", newValue: lng!);
+        }
 
-      final placemarks = await placemarkFromCoordinates(lat!, lng!);
-      city = placemarks[0].locality;
-      print("city is $city");
+        print("lat is $lat & lng is $lng");
 
-      final myCoordinates = Coordinates(lat!, lng!);
-      final params = CalculationMethod.egyptian.getParameters();
-      params.madhab = Madhab.shafi;
-      prayerTimes = PrayerTimes.today(myCoordinates, params);
-      emit(UpdateLocatingSuccess());
+        final placemarks = await placemarkFromCoordinates(lat!, lng!);
+        city = placemarks[0].locality;
+        print("city is $city");
+        if (CacheNetwork.getCacheData(key: "city") == "") {
+          CacheNetwork.insertToCache(key: "city", value: city ?? "");
+        } else {
+          CacheNetwork.update(key: "city", newValue: city ?? "");
+        }
+
+        final myCoordinates = Coordinates(lat!, lng!);
+        final params = CalculationMethod.egyptian.getParameters();
+        params.madhab = Madhab.shafi;
+        prayerTimes = PrayerTimes.today(myCoordinates, params);
+        emit(UpdateLocatingSuccess());
+      } else {
+        emit(UpdateLocatingConnectionFailure());
+      }
     }
   }
 }

@@ -20,15 +20,32 @@ class LocationErrorWidget extends StatelessWidget {
             size: 150.h,
             color: errorColor,
           ),
-          SizedBox(height: 32.h),
+          SizedBox(height: 25.h),
           Text(
             error!,
-            style:
-                const TextStyle(color: errorColor, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: errorColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 18.sp,
+            ),
           ),
           SizedBox(height: 32.h),
           ElevatedButton(
-            child: const Text("اعادة المحاولة"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: errorColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.r),
+              ),
+              minimumSize: Size(100.w, 45.h),
+            ),
+            child: Text(
+              "اعادة المحاولة",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+              ),
+            ),
             onPressed: () {
               if (callback != null) callback!();
             },

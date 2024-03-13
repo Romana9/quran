@@ -26,16 +26,24 @@ void main() async {
   currentList = await CacheNetwork.loadData();
   lastRead = await CacheNetwork.loadDataLastRead();
 
+  if (CacheNetwork.checkContain(key: "fajr") == false) {
+    CacheNetwork.insertBoolToCache(key: "fajr", value: true);
+    CacheNetwork.insertBoolToCache(key: "duhr", value: true);
+    CacheNetwork.insertBoolToCache(key: "asr", value: true);
+    CacheNetwork.insertBoolToCache(key: "maghrib", value: true);
+    CacheNetwork.insertBoolToCache(key: "isha", value: true);
+  }
+
   if (CacheNetwork.getNumCacheData(key: "lat") != 0 ||
       CacheNetwork.getNumCacheData(key: "lng") != 0) {
     lat = CacheNetwork.getNumCacheData(key: "lat");
     lng = CacheNetwork.getNumCacheData(key: "lng");
     print("lat is $lat & lng is $lng");
 
-    final placemarks = await placemarkFromCoordinates(
-        CacheNetwork.getNumCacheData(key: "lat"),
-        CacheNetwork.getNumCacheData(key: "lng"));
-    city = placemarks[0].locality;
+    // final placemarks = await placemarkFromCoordinates(
+    //     CacheNetwork.getNumCacheData(key: "lat"),
+    //     CacheNetwork.getNumCacheData(key: "lng"));
+    city = CacheNetwork.getCacheData(key: "city");
     print("city is $city");
 
     final myCoordinates = Coordinates(lat!, lng!);
@@ -59,6 +67,7 @@ void main() async {
     final placemarks = await placemarkFromCoordinates(lat!, lng!);
     city = placemarks[0].locality;
     print("city is $city");
+    CacheNetwork.insertToCache(key: "city", value: city ?? "");
 
     final myCoordinates = Coordinates(lat!, lng!);
     final params = CalculationMethod.egyptian.getParameters();
@@ -121,7 +130,7 @@ setAlarm() {
         assetAudioPath: 'assets/mp3/adhan.mp3',
         loopAudio: false,
         vibrate: false,
-        volume: 0.8,
+        volume: CacheNetwork.getBoolCacheData(key: "fajr") == true ? 1 : 0,
         fadeDuration: 3.0,
         notificationTitle: 'الأذان',
         notificationBody: 'حان الأن موعد أذان الفجر',
@@ -137,7 +146,7 @@ setAlarm() {
         assetAudioPath: 'assets/mp3/adhan.mp3',
         loopAudio: false,
         vibrate: false,
-        volume: 0.8,
+        volume: CacheNetwork.getBoolCacheData(key: "duhr") == true ? 1 : 0,
         fadeDuration: 3.0,
         notificationTitle: 'الأذان',
         notificationBody: 'حان الأن موعد أذان الظهر',
@@ -155,7 +164,7 @@ setAlarm() {
         assetAudioPath: 'assets/mp3/adhan.mp3',
         loopAudio: false,
         vibrate: false,
-        volume: 0.8,
+        volume: CacheNetwork.getBoolCacheData(key: "asr") == true ? 1 : 0,
         fadeDuration: 3.0,
         notificationTitle: 'الأذان',
         notificationBody: 'حان الأن موعد أذان العصر',
@@ -173,7 +182,7 @@ setAlarm() {
         assetAudioPath: 'assets/mp3/adhan.mp3',
         loopAudio: false,
         vibrate: false,
-        volume: 0.8,
+        volume: CacheNetwork.getBoolCacheData(key: "maghrib") == true ? 1 : 0,
         fadeDuration: 3.0,
         notificationTitle: 'الأذان',
         notificationBody: 'حان الأن موعد أذان المغرب',
@@ -190,7 +199,7 @@ setAlarm() {
         assetAudioPath: 'assets/mp3/adhan.mp3',
         loopAudio: false,
         vibrate: false,
-        volume: 0.8,
+        volume: CacheNetwork.getBoolCacheData(key: "isha") == true ? 1 : 0,
         fadeDuration: 3.0,
         notificationTitle: 'الأذان',
         notificationBody: 'حان الأن موعد أذان العشاء',
