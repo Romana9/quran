@@ -45,8 +45,8 @@ void main() async {
   } else {
     position = await LocationHelper.determinePosition();
     if (position == null) {
-      lat = 0.1;
-      lng = 0.2;
+      lat = 35.652832;
+      lng = 139.839478;
       print("lat is $lat & lng is $lng");
     } else {
       lat = position!.latitude;

@@ -121,7 +121,7 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            lat == 0.1 && lng == 0.2
+            lat == 35.652832 && lng == 139.839478
                 ? null
                 : PersistentNavBarNavigator.pushNewScreen(
                     context,
@@ -154,7 +154,7 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                     ),
                   ],
                 ),
-                child: lat == 0.1 && lng == 0.2
+                child: lat == 35.652832 && lng == 139.839478
                     ? Column(
                         children: [
                           Text(
@@ -208,7 +208,7 @@ class _PrayerTimeContainerState extends State<PrayerTimeContainer> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: 165.w,
+                                width: 173.w,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,

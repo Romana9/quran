@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 24.h),
+                      SizedBox(height: 14.h),
                       Visibility(
                         visible: lastRead.isEmpty ? false : true,
                         child: Column(
@@ -155,37 +155,39 @@ class _HomeState extends State<Home> {
                                       PageTransitionAnimation.cupertino,
                                 );
                               },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.w, vertical: 10.h),
-                                margin: EdgeInsets.symmetric(horizontal: 24.w),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ' آخر قراءة',
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        color: Colors.white,
-                                        // fontWeight: FontWeight.bold,
-                                        fontFamily: "TheSansBold",
+                              child: Center(
+                                child: Container(
+                                  width: 300.w,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.w, vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(15.r),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ' آخر قراءة',
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          color: Colors.white,
+                                          // fontWeight: FontWeight.bold,
+                                          fontFamily: "TheSansBold",
+                                        ),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios_outlined,
-                                      size: 21.h,
-                                      color: Colors.white,
-                                    ),
-                                  ],
+                                      Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        size: 21.h,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 24.h),
+                            SizedBox(height: 14.h),
                           ],
                         ),
                       ),

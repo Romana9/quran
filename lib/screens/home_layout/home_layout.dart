@@ -50,7 +50,7 @@ class HomeLayout extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: SvgPicture.asset("assets/svg/home.svg"),
           iconSize: 24.h,
-          title: ('آخر قراءة'),
+          title: ("المرجعيات"),
           textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
